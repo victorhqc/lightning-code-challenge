@@ -37,7 +37,8 @@ export const it = (name, callback) => {
 };
 
 export const describe = (name, tests) => {
-  const passedTests = sumBy(tests, ({ isFailed }) => {
+  const runnedTests = tests();
+  const passedTests = sumBy(runnedTests, ({ isFailed }) => {
     if (isFailed) {
       return 0;
     }
@@ -47,8 +48,8 @@ export const describe = (name, tests) => {
 
   return {
     name,
-    tests,
-    ratio: passedTests / tests.length,
+    tests: runnedTests,
+    ratio: passedTests / runnedTests.length,
     passedTests,
   };
 };

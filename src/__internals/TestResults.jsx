@@ -1,12 +1,10 @@
 import React, { Fragment, Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Button from './elements/Button';
 
-import evaluateCode from './utils/evaluateCode';
-
-import test from '../test/index';
+import testCases from '../test/testCases';
+import { test } from '../test/index';
 
 const COLORS = {
   red: '#ef476f',
@@ -37,8 +35,8 @@ const getEngineerLevelColor = ({ ratio }) => {
   return COLORS.blue;
 };
 
-const getTestResultColor = ({ didTestPass }) => {
-  if (!didTestPass) {
+const getTestResultColor = ({ isFailed }) => {
+  if (isFailed) {
     return COLORS.red;
   }
 
@@ -67,8 +65,6 @@ class TestsResults extends Component {
     super(props);
 
     this.state = {
-      // engineerLevel: '',
-      // testsPassed: 0,
       ratio: 0,
       tests: [],
     };
@@ -78,7 +74,7 @@ class TestsResults extends Component {
 
   doRefreshResults() {
     this.setState({
-      ...evaluateCode(test),
+      ...testCases(test),
     });
   }
 
@@ -99,13 +95,18 @@ class TestsResults extends Component {
 
     return (
       <TestResultsContainer>
-        {tests.map(({ title, id, ...restOfTest }) => (
+        {tests.map(({
+          name,
+          error,
+          ...restOfTest
+        }) => (
           <TestResult
-            key={id}
+            key={name}
             {...restOfTest}
           >
-            {title}
-            {!restOfTest.didTestPass ? `, but obtained: \`${restOfTest.result}\`` : ''}
+            {name}
+            {'\n'}
+            {restOfTest.isFailed ? error : ''}
           </TestResult>
         ))}
       </TestResultsContainer>

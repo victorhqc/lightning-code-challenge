@@ -56,7 +56,7 @@ describe('it', () => {
 
 describe('describe', () => {
   it('Should run a set of `it` and return its results in an array', () => {
-    expect(evaluateDescribe('something being tested', [
+    expect(evaluateDescribe('something being tested', () => [
       evaluateIt('something passes', () => {
         expect(true).toBe(true);
       }),
