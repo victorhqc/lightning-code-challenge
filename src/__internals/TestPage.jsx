@@ -1,10 +1,17 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import AceEditor from 'react-ace';
+import { Flex, Box } from 'grid-styled';
 
 import 'brace/mode/javascript';
 import 'brace/theme/tomorrow';
 
 import TestResults from './TestResults';
+
+const style = {
+  editor: {
+    width: '100%',
+  },
+};
 
 class TestPage extends Component {
   constructor(props) {
@@ -31,16 +38,22 @@ class TestPage extends Component {
     } = this.state;
 
     return (
-      <Fragment>
-        <TestResults code={code} />
-        <AceEditor
-          onChange={this.doChange}
-          value={code}
-          mode="javascript"
-          theme="tomorrow"
-        />
-      </Fragment>
+      <Flex>
+        <Box width={1 / 2} px={2}>
+          <AceEditor
+            style={style.editor}
+            onChange={this.doChange}
+            value={code}
+            mode="javascript"
+            theme="tomorrow"
+          />
+        </Box>
+        <Box width={1 / 2} px={2}>
+          <TestResults code={code} />
+        </Box>
+      </Flex>
     );
   }
 }
+
 export default TestPage;
