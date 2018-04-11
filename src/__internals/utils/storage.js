@@ -5,5 +5,5 @@ export const saveToStorage = (name, value) => {
 };
 
 export const getFromStorage = (name) => {
-  storage.getIem(name);
+  storage.getItem(name);
 };
