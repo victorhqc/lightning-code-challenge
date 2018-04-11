@@ -1,11 +1,12 @@
 /* eslint no-new-func: 0 */
 
 import sumBy from 'lodash/sumBy';
+import isEqual from 'lodash/isEqual';
 
 export const expect = value => ({
   toBe: (expected) => {
     if (value !== expected) {
-      throw new Error(`expected \`${expected}\` to be \`${value}\``);
+      throw new Error(`expected \`${value}\` to be \`${expected}\``);
     }
 
     return true;
@@ -14,6 +15,15 @@ export const expect = value => ({
   toBeTruthy: () => {
     if (!value) {
       throw new Error(`expected \`${value}\` to be truthy`);
+    }
+
+    return true;
+  },
+
+  equals: (expected) => {
+    if (!isEqual(value, expected)) {
+      const error = `expected \`${JSON.stringify(value)}\` to be \`${JSON.stringify(expected)}\``;
+      throw new Error(error);
     }
 
     return true;
