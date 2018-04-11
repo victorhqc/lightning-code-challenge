@@ -11,7 +11,9 @@ class TestPage extends Component {
     super(props);
 
     this.state = {
-      code: '// Type your code here.',
+      code: `function runTest() {
+    // Your code goes here.
+}`,
     };
 
     this.doChange = this.doChange.bind(this);
