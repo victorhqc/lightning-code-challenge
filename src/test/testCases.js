@@ -4,10 +4,13 @@ import {
   expect,
 } from '../__internals/utils/evaluateCode';
 
-const testCases = test => describe('Foo test', () => [
-  it('Should be foo', () => {
-    expect(test()).toBe('foo');
-  }),
-]);
+const testCases = code => describe('Foo test', () => {
+  console.log('code', code);
+  return [
+    it('Should be foo', () => {
+      expect(test()).toBe('foo');
+    }),
+  ];
+});
 
 export default testCases;

@@ -4,10 +4,10 @@ import {
   Router,
   Route,
   Switch,
-} from 'react-router-dom';
+} from 'react-router';
 import createHistory from 'history/createBrowserHistory';
 
-import TestResults from './TestResults';
+import TestPage from './TestPage';
 import Introduction from './Introduction';
 
 const Main = styled.div`
@@ -21,7 +21,7 @@ const App = () => (
     <Router history={history}>
       <Switch>
         <Route exact path="/" component={Introduction} />
-        <Route path="/test" component={TestResults} />
+        <Route path="/test" component={TestPage} />
       </Switch>
     </Router>
   </Main>

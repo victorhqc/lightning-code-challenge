@@ -1,10 +1,10 @@
 import React, { Fragment, Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Button from './elements/Button';
 
 import testCases from '../test/testCases';
-import { test } from '../test/index';
 
 const COLORS = {
   red: '#ef476f',
@@ -73,8 +73,13 @@ class TestsResults extends Component {
   }
 
   doRefreshResults() {
+    const {
+      code,
+    } = this.props;
+    console.log('CODE', code);
+
     this.setState({
-      ...testCases(test),
+      ...testCases(code),
     });
   }
 
@@ -123,5 +128,9 @@ class TestsResults extends Component {
     );
   }
 }
+
+TestsResults.propTypes = {
+  code: PropTypes.string.isRequired,
+};
 
 export default TestsResults;
