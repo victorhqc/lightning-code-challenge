@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import AceEditor from 'react-ace';
+import { mapProps } from 'recompose';
 import { Flex, Box } from 'grid-styled';
 
 import 'brace/mode/javascript';
 import 'brace/theme/tomorrow';
+
+import {
+  saveToStorage,
+  getFromStorage,
+} from './utils/storage';
 
 import TestResults from './TestResults';
 
@@ -13,25 +20,35 @@ const style = {
   },
 };
 
+const INITIAL_CODE = `// Do not edit anything outside this scope.
+function test() {
+// Your code goes here. Feel free to add as many functions as you see fit.
+function parseElements() {
+}
+
+return parseElements;
+}`;
+
 class TestPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      code: `// Do not edit anything outside this scope.
-function test() {
-    // Your code goes here. Feel free to add as many functions as you see fit.
-    function parseElements() {
-    }
+    const initialCode = props.get('initialCode');
 
-    return parseElements;
-}`,
+    this.state = {
+      code: initialCode || INITIAL_CODE,
     };
 
     this.doChange = this.doChange.bind(this);
   }
 
   doChange(code) {
+    const {
+      save,
+    } = this.props;
+
+    save('initialCode', code);
+
     this.setState({
       code,
     });
@@ -61,4 +78,15 @@ function test() {
   }
 }
 
-export default TestPage;
+TestPage.propTypes = {
+  get: PropTypes.func.isRequired,
+  save: PropTypes.func.isRequired,
+};
+
+const mappedProps = mapProps(props => ({
+  ...props,
+  get: getFromStorage,
+  save: saveToStorage,
+}));
+
+export default mappedProps(TestPage);
