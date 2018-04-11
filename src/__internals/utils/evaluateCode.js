@@ -1,3 +1,5 @@
+/* eslint no-new-func: 0 */
+
 import sumBy from 'lodash/sumBy';
 
 export const expect = value => ({
@@ -53,3 +55,5 @@ export const describe = (name, tests) => {
     passedTests,
   };
 };
+
+export const parseTextToCode = code => Function(`"use strict"; return (${code})`)();
