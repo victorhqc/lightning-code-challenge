@@ -13,6 +13,7 @@ import {
 } from './utils/storage';
 
 import TestResults from './TestResults';
+import Button from './elements/Button';
 
 const style = {
   editor: {
@@ -40,6 +41,7 @@ class TestPage extends Component {
     };
 
     this.doChange = this.doChange.bind(this);
+    this.clearCode = this.clearCode.bind(this);
   }
 
   doChange(code) {
@@ -51,6 +53,18 @@ class TestPage extends Component {
 
     this.setState({
       code,
+    });
+  }
+
+  clearCode() {
+    const {
+      save,
+    } = this.props;
+
+    save('initialCode', '');
+
+    this.setState({
+      code: INITIAL_CODE,
     });
   }
 
@@ -69,6 +83,10 @@ class TestPage extends Component {
             mode="javascript"
             theme="tomorrow"
           />
+          <br />
+          <Button onClick={this.clearCode}>
+            🗑 Clear code
+          </Button>
         </Box>
         <Box width={1 / 2} px={2}>
           <TestResults code={code} />
