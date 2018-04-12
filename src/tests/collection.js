@@ -9,13 +9,8 @@ export const instructions = `
 # Collection
 
 ## Instructions
-Write a **Collection** class that has the following methods:
-- add: (key, value) returns the value.
-- get: (key) returns the value assigned to that key.
-- remove: (key) removes the value assigned to that key, returns true if succeeds, false if fails.
-- forEach: (callback) the callback should be able to call _this.add, this.get, etc._
-
-### Usage example
+You need to write a function called **Collection**. and implement the functionality needed to
+be used like this example:
 \`\`\`js
 const collection = new Collection({
   name: 'test',
@@ -34,9 +29,15 @@ collection.forEach(function(key) {
 });
 \`\`\`
 
-The **Collection** has to use the prototypal approach, and the _forEach_ method
+This is just an example of how your collection could be used. **You only need to write the
+implementation, not the previous example.** The tests to evaluate the logic are already
+implemented and running internally.
 
-feel free to use ES6 sugar that your browser supports.
+The **Collection** needs to have the following methods:
+- **add:** (key, value) returns the value.
+- **get:** (key) returns the value assigned to that key.
+- **remove:** (key) removes the value assigned to that key, returns true if succeeds, false if fails.
+- **forEach:** (callback) the callback should be able to call _this.add, this.get, etc._
 `;
 
 export const testCases = code => describe('Foo test', () => {
