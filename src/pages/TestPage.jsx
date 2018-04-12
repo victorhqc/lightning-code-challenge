@@ -73,7 +73,7 @@ class TestPage extends Component {
 
     return (
       <Flex>
-        <Box width={1 / 2} px={2}>
+        <Box width={2 / 3} px={2}>
           <AceEditor
             style={style.editor}
             onChange={this.doChange}
@@ -89,7 +89,7 @@ class TestPage extends Component {
             🗑 Clear code
           </Button>
         </Box>
-        <Box width={1 / 2} px={2}>
+        <Box width={1 / 3} px={2}>
           <TestResults code={code} testCases={testCases} />
         </Box>
       </Flex>

@@ -52,6 +52,9 @@ const getEngineerLevel = ({ ratio }) => {
   return 'senior';
 };
 
+const getPassingTests = ({ tests, passedTests }) =>
+  `${passedTests} / ${tests.length}`;
+
 const getTestResultColor = ({ isFailed }) => {
   if (isFailed) {
     return COLORS.red;
@@ -70,6 +73,8 @@ const TestResultsContainer = styled.ul`
   margin: 0;
   list-style: none;
   padding: 0;
+  height: 70vh;
+  overflow: auto;
 `;
 
 const TestResult = styled.li`
@@ -84,6 +89,7 @@ class TestsResults extends Component {
 
     this.state = {
       ratio: 0,
+      passedTests: 0,
       tests: [],
     };
 
@@ -112,7 +118,11 @@ class TestsResults extends Component {
       <EngineerLevelContainer
         ratio={ratio}
       >
-        <h2>Engineer level: {getEngineerLevel({ ratio })}</h2>
+        <h2>
+          Engineer level: {getEngineerLevel({ ratio })}
+          <br />
+          <small>Tests passing: {getPassingTests(this.state)}</small>
+        </h2>
       </EngineerLevelContainer>
     );
   }
