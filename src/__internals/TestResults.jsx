@@ -38,6 +38,22 @@ const getEngineerLevelColor = ({ ratio }) => {
   return COLORS.blue;
 };
 
+const getEngineerLevel = ({ ratio }) => {
+  if (ratio < 1 / 5) {
+    return 'junior';
+  }
+
+  if (ratio < 1 / 2) {
+    return 'mid';
+  }
+
+  if (ratio < 4 / 5) {
+    return 'mid-high';
+  }
+
+  return 'senior';
+};
+
 const getTestResultColor = ({ isFailed }) => {
   if (isFailed) {
     return COLORS.red;
@@ -96,7 +112,7 @@ class TestsResults extends Component {
       <EngineerLevelContainer
         ratio={ratio}
       >
-        <h2>Engineer level</h2>
+        <h2>Engineer level: {getEngineerLevel({ ratio })}</h2>
       </EngineerLevelContainer>
     );
   }
