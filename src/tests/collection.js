@@ -9,7 +9,7 @@ export const instructions = `
 # Collection
 
 ## Instructions
-You need to write a function called **Collection**. and implement the functionality needed to
+Write a function called **Collection** and implement the functionality needed to
 be used like this example:
 \`\`\`js
 const collection = new Collection({
@@ -41,33 +41,33 @@ The **Collection** needs to have the following methods:
 `;
 
 export const testCases = code => describe('Foo test', () => {
-  const Scope = parseTextToCode(code)();
+  const Collection = parseTextToCode(code)();
 
   return [
     it('Collection exists', () => {
-      const collection = new Scope();
+      const collection = new Collection();
       expect(typeof collection).toBe('object');
     }),
 
     it('Should come from a Collection instance', () => {
-      const collection = new Scope();
+      const collection = new Collection();
       expect(collection.constructor.name).toBe('Collection');
     }),
 
     it('Should not share instances', () => {
-      const collection = new Scope();
-      const otherCollection = new Scope();
+      const collection = new Collection();
+      const otherCollection = new Collection();
       expect(collection !== otherCollection).toBeTruthy();
     }),
 
     it('add method exists', () => {
-      const collection = new Scope();
+      const collection = new Collection();
       // collection.hasOwnProperty
       expect(typeof collection.add !== 'undefined').toBeTruthy();
     }),
 
     it('add should not be a property of Collection', () => {
-      const collection = new Scope();
+      const collection = new Collection();
 
       expect(typeof collection.add !== 'undefined').toBeTruthy();
       // collection.hasOwnProperty
@@ -75,14 +75,14 @@ export const testCases = code => describe('Foo test', () => {
     }),
 
     it('add() should save a value', () => {
-      const collection = new Scope();
+      const collection = new Collection();
 
       collection.add('foo', 'bar');
       expect(collection.foo).toBe('bar');
     }),
 
     it('Constructor should add keys in object', () => {
-      const collection = new Scope({
+      const collection = new Collection({
         name: 'test',
         email: 'hello@world',
       });
@@ -92,13 +92,13 @@ export const testCases = code => describe('Foo test', () => {
     }),
 
     it('get method exists', () => {
-      const collection = new Scope();
+      const collection = new Collection();
       // collection.hasOwnProperty
       expect(typeof collection.get !== 'undefined').toBeTruthy();
     }),
 
     it('get should not be a property of Collection', () => {
-      const collection = new Scope();
+      const collection = new Collection();
 
       expect(typeof collection.get !== 'undefined').toBeTruthy();
       // collection.hasOwnProperty
@@ -106,7 +106,7 @@ export const testCases = code => describe('Foo test', () => {
     }),
 
     it('get() should save a value', () => {
-      const collection = new Scope();
+      const collection = new Collection();
       collection.foo = 'bar';
 
       collection.get('foo');
@@ -114,13 +114,13 @@ export const testCases = code => describe('Foo test', () => {
     }),
 
     it('remove method exists', () => {
-      const collection = new Scope();
+      const collection = new Collection();
       // collection.hasOwnProperty
       expect(typeof collection.remove !== 'undefined').toBeTruthy();
     }),
 
     it('remove should not be a property of Collection', () => {
-      const collection = new Scope();
+      const collection = new Collection();
 
       expect(typeof collection.remove !== 'undefined').toBeTruthy();
       // collection.hasOwnProperty
@@ -128,7 +128,7 @@ export const testCases = code => describe('Foo test', () => {
     }),
 
     it('remove() should remove a value', () => {
-      const collection = new Scope();
+      const collection = new Collection();
       collection.foo = 'bar';
 
       collection.remove('foo');
@@ -136,13 +136,13 @@ export const testCases = code => describe('Foo test', () => {
     }),
 
     it('forEach method exists', () => {
-      const collection = new Scope();
+      const collection = new Collection();
       // collection.hasOwnProperty
       expect(typeof collection.forEach !== 'undefined').toBeTruthy();
     }),
 
     it('forEach should not be a property of Collection', () => {
-      const collection = new Scope();
+      const collection = new Collection();
 
       expect(typeof collection.forEach !== 'undefined').toBeTruthy();
       // collection.hasOwnProperty
@@ -150,11 +150,11 @@ export const testCases = code => describe('Foo test', () => {
     }),
 
     it('Should not expose data to other instances', () => {
-      const collection = new Scope();
+      const collection = new Collection();
       collection.add('name', 'test');
       collection.add('email', 'hello@world');
 
-      const otherCollection = new Scope({
+      const otherCollection = new Collection({
         name2: 'test2',
         email2: 'hello2@world',
       });
@@ -164,7 +164,7 @@ export const testCases = code => describe('Foo test', () => {
     }),
 
     it('forEach() should allow use own methods in callback', () => {
-      const collection = new Scope({
+      const collection = new Collection({
         name: 'test',
         email: 'hello@world',
       });
