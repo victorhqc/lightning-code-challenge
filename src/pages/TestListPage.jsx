@@ -15,6 +15,10 @@ Welcome to the lightning challenge, this application will try to test your JavaS
 You'll have to write code that passes the predefined unit tests for it. The more tests your code
 passes, the better score you'll get.
 
+## Objective
+Your code needs to pass as many unit tests as possible. You don't need to
+write them, they are already ready for you. Just focus on writing the implementation.
+
 ## Tests available
 `;
 
