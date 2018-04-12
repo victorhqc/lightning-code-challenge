@@ -1,13 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { mapProps } from 'recompose';
 import {
   Router,
   Route,
   Switch,
 } from 'react-router';
 import createHistory from 'history/createBrowserHistory';
-import map from 'lodash/map';
+import reduce from 'lodash/reduce';
 
 import 'highlight.js/styles/tomorrow.css';
 
@@ -23,36 +22,40 @@ const Main = styled.div`
 
 const history = createHistory();
 
-const mapTestRoutes = (test) => {
-  const mappedProps = mapProps(props => ({
-    ...props,
-    ...test,
-  }));
+const mapTest = (WrappedComponent, route) => props => (
+  <WrappedComponent {...props} {...route.test} />
+);
 
-  return (
-    <Fragment>
-      <Route
-        exact
-        key={`${test.href}/intro`}
-        path={`${test.href}/intro`}
-        component={mappedProps(IntroductionPage)}
-      />
-      <Route
-        exact
-        key={`${test.href}`}
-        path={`${test.href}`}
-        component={mappedProps(TestPage)}
-      />
-    </Fragment>
-  );
-};
+const addRoutes = () => reduce(TESTS, (prev, test) => ([
+  ...prev,
+  {
+    component: TestPage,
+    path: test.path,
+    test,
+  },
+  {
+    path: `/intro${test.path}`,
+    component: IntroductionPage,
+    test,
+  },
+]), []);
+
+const RouteWithSubRoutes = route => (
+  <Route
+    exact
+    path={route.path}
+    render={mapTest(route.component, route)}
+  />
+);
 
 const App = () => (
   <Main>
     <Router history={history}>
       <Switch>
         <Route exact path="/" component={TestListPage} />
-        {map(TESTS, mapTestRoutes)}
+        {addRoutes().map(route => (
+          <RouteWithSubRoutes key={route.path} {...route} />
+        ))}
       </Switch>
     </Router>
   </Main>

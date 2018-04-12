@@ -38,10 +38,10 @@ class TestPage extends Component {
   doChange(code) {
     const {
       save,
-      href,
+      path,
     } = this.props;
 
-    save(href, code);
+    save(path, code);
 
     this.setState({
       code,
@@ -51,11 +51,11 @@ class TestPage extends Component {
   clearCode() {
     const {
       save,
-      href,
+      path,
       defaultCode,
     } = this.props;
 
-    save(href, '');
+    save(path, '');
 
     this.setState({
       code: defaultCode,
@@ -99,7 +99,7 @@ class TestPage extends Component {
 
 TestPage.propTypes = {
   defaultCode: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
   testCases: PropTypes.func.isRequired,
 
   get: PropTypes.func.isRequired,

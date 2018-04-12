@@ -9,8 +9,8 @@ const TestListPage = () => (
     <h2>Tests available</h2>
     <ul>
       {map(TESTS, test => (
-        <li key={test.href}>
-          <Link href={`test/${test.href}/intro`} to={`test/${test.href}/intro`}>
+        <li key={test.path}>
+          <Link href={`/intro${test.path}`} to={`/intro${test.path}`}>
             {test.name}
           </Link>
         </li>

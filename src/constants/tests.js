@@ -6,14 +6,25 @@ import {
   instructions as parseArrayInstructions,
 } from '../tests/parseArray';
 
-const appendTestPrefix = href => `/test${href}`;
+import {
+  testCases as collectionTestCases,
+  defaultCode as collectionDefaultCode,
+  instructions as collectionInstructions,
+} from '../tests/collection';
 
 export const TESTS = [
   {
     name: 'Parse Array',
-    href: appendTestPrefix('/parse-array'),
+    path: '/parse-array',
     instructions: parseArrayInstructions,
     testCases: parseArrayTestCases,
     defaultCode: parseArrayDefaultCode,
+  },
+  {
+    name: 'Collection',
+    path: '/collection',
+    instructions: collectionInstructions,
+    testCases: collectionTestCases,
+    defaultCode: collectionDefaultCode,
   },
 ];

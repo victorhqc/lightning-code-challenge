@@ -27,7 +27,7 @@ class IntroductionPage extends Component {
   render() {
     const {
       instructions,
-      href,
+      path,
     } = this.props;
 
     return (
@@ -35,7 +35,7 @@ class IntroductionPage extends Component {
         <ReactMarkdown source={INTRO} />
         <ReactMarkdown source={instructions} />
         <br />
-        <Link to={href} href={href}>
+        <Link to={path} href={path}>
           Start test!
         </Link>
       </Fragment>
@@ -45,7 +45,7 @@ class IntroductionPage extends Component {
 
 IntroductionPage.propTypes = {
   instructions: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default IntroductionPage;
