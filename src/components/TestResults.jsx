@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 
-import highlightCode from './utils/highlightCode';
+import highlightCode from '../utils/highlightCode';
 
-import Button from './elements/Button';
+import Button from '../elements/Button';
 
 import testCases from '../test/testCases';
 

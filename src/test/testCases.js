@@ -3,7 +3,7 @@ import {
   it,
   expect,
   parseTextToCode,
-} from '../__internals/utils/evaluateCode';
+} from '../utils/evaluateCode';
 
 const testCases = code => describe('Foo test', () => {
   const parsedCode = parseTextToCode(code)();
