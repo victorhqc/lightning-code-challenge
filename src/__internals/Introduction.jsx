@@ -22,6 +22,8 @@ Just focus on finishing as much as possible.
 ## Instructions
 Write a function called **parseElements** that receive an array of objects and
 applies the following rules:
+- The elements inside the new arrays should be ordered by name.
+- The elements that have **isActive** as false, should not be included.
 - It returns a new object with keys based in the element's type, i.e.
   \`\`\`js
   var array = [{type: 'foo'}, {type: 'bar'}];
@@ -31,8 +33,6 @@ applies the following rules:
     bar: [{ type: 'bar' }]
   };
   \`\`\`
-- The elements inside the new arrays should be ordered by name.
-- The elements that have **isActive** as false, should not be included.
 - No mutations should exist.
 
 _Additional Notes: Use any additional function you see fit to accomplish the result._
