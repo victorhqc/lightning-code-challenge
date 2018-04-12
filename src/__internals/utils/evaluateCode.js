@@ -2,6 +2,7 @@
 
 import sumBy from 'lodash/sumBy';
 import isEqual from 'lodash/isEqual';
+import indexOf from 'lodash/indexOf';
 
 import toType from 'to-type';
 
@@ -66,8 +67,39 @@ export const it = (name, callback) => {
   }
 };
 
-export const describe = (name, tests) => {
-  const runnedTests = tests();
+const getDefaultOptions = () => ({
+  evaluateOnce: false,
+  ignoreTests: [],
+});
+
+const updateTestResultByOptions = (tests, options) => {
+  const {
+    evaluateOnce,
+    ignoreTests,
+  } = options;
+
+  if (!evaluateOnce) {
+    return tests;
+  }
+
+  return tests.map((test) => {
+    if (indexOf(ignoreTests, test.name) < 0) {
+      return {
+        ...test,
+        isIgnored: undefined,
+      };
+    }
+
+    return {
+      ...test,
+      isFailed: false,
+      isIgnored: true,
+    };
+  });
+};
+
+export const describe = (name, tests, options = getDefaultOptions()) => {
+  const runnedTests = updateTestResultByOptions(tests(), options);
   const passedTests = sumBy(runnedTests, ({ isFailed }) => {
     if (isFailed) {
       return 0;

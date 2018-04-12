@@ -151,11 +151,12 @@ describe('describe', () => {
         },
         {
           isFailed: false,
+          isIgnored: true,
           error: 'oh no!',
           name: 'something fails',
         },
       ],
-      passedTests: 1,
+      passedTests: 2,
       ratio: 1,
     };
 
