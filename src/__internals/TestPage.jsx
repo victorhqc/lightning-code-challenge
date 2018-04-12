@@ -80,6 +80,9 @@ class TestPage extends Component {
             style={style.editor}
             onChange={this.doChange}
             value={code}
+            setOptions={{
+              spellcheck: false,
+            }}
             mode="javascript"
             theme="tomorrow"
           />

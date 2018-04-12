@@ -28,7 +28,7 @@ const testCases = code => describe('Foo test', () => {
         ],
       };
 
-      expect(parsedCode(elements)).equals(expectedResult);
+      expect(parsedCode(elements)).toEqual(expectedResult);
     }),
 
     it('Should order elements by name', () => {
@@ -50,7 +50,7 @@ const testCases = code => describe('Foo test', () => {
         ],
       };
 
-      expect(parsedCode(elements)).equals(expectedResult);
+      expect(parsedCode(elements)).toEqual(expectedResult);
     }),
 
     it('Should filter by `isActive`', () => {
@@ -70,7 +70,7 @@ const testCases = code => describe('Foo test', () => {
         ],
       };
 
-      expect(parsedCode(elements)).equals(expectedResult);
+      expect(parsedCode(elements)).toEqual(expectedResult);
     }),
   ];
 });

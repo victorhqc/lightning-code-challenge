@@ -11,9 +11,7 @@ const parseValue = (value) => {
     case 'object':
       return `
 \`\`\`js
-
 ${JSON.stringify(value, null, ' ')}
-
 \`\`\`
 `;
     default:
@@ -41,7 +39,7 @@ export const expect = value => ({
     return true;
   },
 
-  equals: (expected) => {
+  toEqual: (expected) => {
     if (!isEqual(value, expected)) {
       throw new Error(expectedValueToBeExpected(value, expected));
     }
