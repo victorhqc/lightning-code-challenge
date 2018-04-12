@@ -84,7 +84,7 @@ class TestPage extends Component {
             theme="tomorrow"
           />
           <br />
-          <Button onClick={this.clearCode}>
+          <Button onClick={this.clearCode} color="red">
             🗑 Clear code
           </Button>
         </Box>

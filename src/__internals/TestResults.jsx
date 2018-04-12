@@ -69,13 +69,14 @@ const EngineerLevelContainer = styled.div`
 `;
 
 const TestResultsContainer = styled.ul`
-  margin: none;
+  margin: 0;
   list-style: none;
-  padding: none;
+  padding: 0;
 `;
 
 const TestResult = styled.li`
   color: white;
+  padding: 5px;
   background-color: ${getTestResultColor};
 `;
 
@@ -146,8 +147,8 @@ ${restOfTest.isFailed ? error : ''}
     return (
       <Fragment>
         {this.renderEngineerLevel()}
-        {this.renderTestResults()}
         <Button onClick={this.doRefreshResults}>Refresh results</Button>
+        {this.renderTestResults()}
       </Fragment>
     );
   }
