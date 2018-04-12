@@ -7,6 +7,7 @@ import toType from 'to-type';
 
 const parseValue = (value) => {
   switch (toType(value)) {
+    case 'array':
     case 'object':
       return `
 \`\`\`js
