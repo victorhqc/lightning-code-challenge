@@ -1,6 +1,9 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import ReactMarkdown from 'react-markdown';
+
+import highlightCode from './utils/highlightCode';
 
 import Button from './elements/Button';
 
@@ -72,6 +75,10 @@ class TestsResults extends Component {
     this.doRefreshResults = this.doRefreshResults.bind(this);
   }
 
+  componentDidUpdate() {
+    highlightCode();
+  }
+
   doRefreshResults() {
     const {
       code,
@@ -108,9 +115,11 @@ class TestsResults extends Component {
             key={name}
             {...restOfTest}
           >
-            {name}
-            {'\n'}
-            {restOfTest.isFailed ? error : ''}
+            <ReactMarkdown
+              source={`### ${name}
+${restOfTest.isFailed ? error : ''}
+`}
+            />
           </TestResult>
         ))}
       </TestResultsContainer>

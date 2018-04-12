@@ -1,16 +1,11 @@
 /* eslint jsx-a11y/anchor-is-valid: 0 */
 
 import React, { Component, Fragment } from 'react';
-import map from 'lodash/map';
 import ReactMarkdown from 'react-markdown';
 
-import hljs from 'highlight.js';
-import 'highlight.js/styles/tomorrow.css';
-
-import 'brace/mode/javascript';
-import 'brace/theme/tomorrow';
-
 import Link from './elements/Link';
+
+import highlightCode from './utils/highlightCode';
 
 const introductionText = `
 # Hello Fresh Lightning Code Challenge
@@ -45,8 +40,7 @@ _Additional Notes: Use any additional function you see fit to accomplish the res
 
 class Introduction extends Component {
   componentDidMount() {
-    const codeBlocks = document.getElementsByClassName('language-js');
-    map(codeBlocks, codeBlock => hljs.highlightBlock(codeBlock));
+    highlightCode();
   }
 
   render() {

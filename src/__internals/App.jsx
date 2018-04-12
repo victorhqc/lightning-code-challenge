@@ -7,6 +7,8 @@ import {
 } from 'react-router';
 import createHistory from 'history/createBrowserHistory';
 
+import 'highlight.js/styles/tomorrow.css';
+
 import TestPage from './TestPage';
 import Introduction from './Introduction';
 

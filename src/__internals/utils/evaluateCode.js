@@ -3,10 +3,30 @@
 import sumBy from 'lodash/sumBy';
 import isEqual from 'lodash/isEqual';
 
+import toType from 'to-type';
+
+const parseValue = (value) => {
+  switch (toType(value)) {
+    case 'object':
+      return `
+\`\`\`js
+
+${JSON.stringify(value, null, ' ')}
+
+\`\`\`
+`;
+    default:
+      return `**${value}**`;
+  }
+};
+
+const expectedValueToBeExpected = (value, expected) =>
+  `expected ${parseValue(value)} to be ${parseValue(expected)}`;
+
 export const expect = value => ({
   toBe: (expected) => {
     if (value !== expected) {
-      throw new Error(`expected \`${value}\` to be \`${expected}\``);
+      throw new Error(expectedValueToBeExpected(value, expected));
     }
 
     return true;
@@ -14,7 +34,7 @@ export const expect = value => ({
 
   toBeTruthy: () => {
     if (!value) {
-      throw new Error(`expected \`${value}\` to be truthy`);
+      throw new Error(expectedValueToBeExpected(value, 'truthy'));
     }
 
     return true;
@@ -22,8 +42,7 @@ export const expect = value => ({
 
   equals: (expected) => {
     if (!isEqual(value, expected)) {
-      const error = `expected \`${JSON.stringify(value)}\` to be \`${JSON.stringify(expected)}\``;
-      throw new Error(error);
+      throw new Error(expectedValueToBeExpected(value, expected));
     }
 
     return true;
