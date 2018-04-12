@@ -28,6 +28,90 @@ export const testCases = code => describe('Foo test', () => {
       const collection = new Scope();
       expect(typeof collection).toBe('object');
     }),
+
+    it('Should come from a Collection instance', () => {
+      const collection = new Scope();
+      expect(collection.constructor.name).toBe('Collection');
+    }),
+
+    it('add method exists', () => {
+      const collection = new Scope();
+      // collection.hasOwnProperty
+      expect(typeof collection.add !== 'undefined').toBeTruthy();
+    }),
+
+    it('add should not be a property of Collection', () => {
+      const collection = new Scope();
+
+      expect(typeof collection.add !== 'undefined').toBeTruthy();
+      // collection.hasOwnProperty
+      expect(!Object.prototype.hasOwnProperty.call(collection, 'add')).toBeTruthy();
+    }),
+
+    it('add() should save a value', () => {
+      const collection = new Scope();
+
+      collection.add('foo', 'bar');
+      expect(collection.foo).toBe('bar');
+    }),
+
+    it('get method exists', () => {
+      const collection = new Scope();
+      // collection.hasOwnProperty
+      expect(typeof collection.get !== 'undefined').toBeTruthy();
+    }),
+
+    it('get should not be a property of Collection', () => {
+      const collection = new Scope();
+
+      expect(typeof collection.get !== 'undefined').toBeTruthy();
+      // collection.hasOwnProperty
+      expect(!Object.prototype.hasOwnProperty.call(collection, 'get')).toBeTruthy();
+    }),
+
+    it('get() should save a value', () => {
+      const collection = new Scope();
+      collection.foo = 'bar';
+
+      collection.get('foo');
+      expect(collection.foo).toBe('bar');
+    }),
+
+    it('remove method exists', () => {
+      const collection = new Scope();
+      // collection.hasOwnProperty
+      expect(typeof collection.remove !== 'undefined').toBeTruthy();
+    }),
+
+    it('remove should not be a property of Collection', () => {
+      const collection = new Scope();
+
+      expect(typeof collection.remove !== 'undefined').toBeTruthy();
+      // collection.hasOwnProperty
+      expect(!Object.prototype.hasOwnProperty.call(collection, 'remove')).toBeTruthy();
+    }),
+
+    it('remove() should remove a value', () => {
+      const collection = new Scope();
+      collection.foo = 'bar';
+
+      collection.remove('foo');
+      expect(collection.foo).toBe(undefined);
+    }),
+
+    it('forEach method exists', () => {
+      const collection = new Scope();
+      // collection.hasOwnProperty
+      expect(typeof collection.forEach !== 'undefined').toBeTruthy();
+    }),
+
+    it('forEach should not be a property of Collection', () => {
+      const collection = new Scope();
+
+      expect(typeof collection.forEach !== 'undefined').toBeTruthy();
+      // collection.hasOwnProperty
+      expect(!Object.prototype.hasOwnProperty.call(collection, 'forEach')).toBeTruthy();
+    }),
   ];
 });
 
