@@ -25,7 +25,7 @@ const INITIAL_CODE = `// Do not edit anything outside this scope.
 function test() {
     // Your code goes here. Feel free to add as many functions as you see fit.
     function parseElements() {
-}
+    }
 
 return parseElements;
 }`;
