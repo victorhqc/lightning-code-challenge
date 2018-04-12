@@ -76,7 +76,6 @@ class TestsResults extends Component {
     const {
       code,
     } = this.props;
-    console.log('CODE', code);
 
     this.setState({
       ...testCases(code),
