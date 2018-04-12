@@ -13,6 +13,7 @@ import {
 } from '../utils/storage';
 
 import TestResults from '../components/TestResults';
+import Container from '../elements/Container';
 import Button from '../elements/Button';
 
 const style = {
@@ -72,27 +73,29 @@ class TestPage extends Component {
     } = this.props;
 
     return (
-      <Flex>
-        <Box width={2 / 3} px={2}>
-          <AceEditor
-            style={style.editor}
-            onChange={this.doChange}
-            value={code}
-            setOptions={{
-              spellcheck: false,
-            }}
-            mode="javascript"
-            theme="tomorrow"
-          />
-          <br />
-          <Button onClick={this.clearCode} color="red">
-            🗑 Clear code
-          </Button>
-        </Box>
-        <Box width={1 / 3} px={2}>
-          <TestResults code={code} testCases={testCases} />
-        </Box>
-      </Flex>
+      <Container>
+        <Flex>
+          <Box width={2 / 3} px={2}>
+            <AceEditor
+              style={style.editor}
+              onChange={this.doChange}
+              value={code}
+              setOptions={{
+                spellcheck: false,
+              }}
+              mode="javascript"
+              theme="tomorrow"
+            />
+            <br />
+            <Button onClick={this.clearCode} color="red">
+              🗑 Clear code
+            </Button>
+          </Box>
+          <Box width={1 / 3} px={2}>
+            <TestResults code={code} testCases={testCases} />
+          </Box>
+        </Flex>
+      </Container>
     );
   }
 }

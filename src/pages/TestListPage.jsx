@@ -1,11 +1,13 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import map from 'lodash/map';
+
+import Container from '../elements/Container';
 
 import { TESTS } from '../constants/tests';
 
 const TestListPage = () => (
-  <Fragment>
+  <Container>
     <h2>Tests available</h2>
     <ul>
       {map(TESTS, test => (
@@ -16,7 +18,7 @@ const TestListPage = () => (
         </li>
       ))}
     </ul>
-  </Fragment>
+  </Container>
 );
 
 export default TestListPage;

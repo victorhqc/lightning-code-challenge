@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { Fragment } from 'react';
+import styled, { ThemeProvider, injectGlobal } from 'styled-components';
 import {
   Router,
   Route,
@@ -10,14 +10,29 @@ import reduce from 'lodash/reduce';
 
 import 'highlight.js/styles/tomorrow.css';
 
+import TopHeader from './elements/TopHeader';
+
 import IntroductionPage from './pages/IntroductionPage';
 import TestPage from './pages/TestPage';
 import TestListPage from './pages/TestListPage';
 
 import { TESTS } from './constants/tests';
 
+import { getBackgroundColor } from './utils/theme';
+
+/* eslint no-unused-expressions: 0 */
+injectGlobal`
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+`;
+
 const Main = styled.div`
-  font-family: sans-serif;
+  background-color: ${getBackgroundColor};
+  width: 100%;
+  height: 100vh;
 `;
 
 const history = createHistory();
@@ -49,16 +64,21 @@ const RouteWithSubRoutes = route => (
 );
 
 const App = () => (
-  <Main>
-    <Router history={history}>
-      <Switch>
-        <Route exact path="/" component={TestListPage} />
-        {addRoutes().map(route => (
-          <RouteWithSubRoutes key={route.path} {...route} />
-        ))}
-      </Switch>
-    </Router>
-  </Main>
+  <Router history={history}>
+    <ThemeProvider theme={{ mode: 'dark' }}>
+      <Fragment>
+        <TopHeader />
+        <Main>
+          <Switch>
+            <Route exact path="/" component={TestListPage} />
+            {addRoutes().map(route => (
+              <RouteWithSubRoutes key={route.path} {...route} />
+            ))}
+          </Switch>
+        </Main>
+      </Fragment>
+    </ThemeProvider>
+  </Router>
 );
 
 export default App;
