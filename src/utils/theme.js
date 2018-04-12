@@ -1,4 +1,7 @@
 import theme from 'styled-theming';
+import PropTypes from 'prop-types';
+
+import { PADDING } from '../constants/theme';
 
 export const getBackgroundColor = theme('mode', {
   light: '#fff',
@@ -19,3 +22,15 @@ export const getComplementColor = theme('mode', {
   light: '#000',
   dark: '#fbfbfb',
 });
+
+export const getPadding = theme.variants('size', 'padding', {
+  default: { normal: PADDING.normal.md, compact: PADDING.compact.md },
+  xsmall: { normal: PADDING.normal.xs, compact: PADDING.compact.xs },
+  small: { normal: PADDING.normal.sm, compact: PADDING.compact.sm },
+  large: { normal: PADDING.normal.lg, compact: PADDING.compact.lg },
+  xlarge: { normal: PADDING.normal.xl, compact: PADDING.compact.xl },
+});
+
+export const paddingProps = {
+  padding: PropTypes.oneOf(['default', 'xsmall', 'small', 'large', 'xlarge']),
+};

@@ -7,12 +7,14 @@ import {
   getComplementColor,
 } from '../utils/theme';
 
+import { HEADER_HEIGHT } from '../constants/theme';
+
 const Header = styled.header`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 50px;
+  height: ${HEADER_HEIGHT}px;
   background-color: ${getComplementBackgroundColor};
 `;
 
