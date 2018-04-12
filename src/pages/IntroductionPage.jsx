@@ -7,7 +7,7 @@ import Link from '../elements/Link';
 import highlightCode from '../utils/highlightCode';
 
 const INTRO = `
-# Hello Fresh Lightning Code Challenge
+# Lightning Code Challenge
 
 ## Introduction
 Follow the instructions to write the piece of code instructed. The more
