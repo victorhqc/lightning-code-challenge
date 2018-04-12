@@ -6,6 +6,19 @@ import Link from '../elements/Link';
 
 import highlightCode from '../utils/highlightCode';
 
+const INTRO = `
+# Hello Fresh Lightning Code Challenge
+
+## Introduction
+Follow the instructions to write the piece of code instructed. The more
+tests it passes, the better score you'll get.
+
+## Objective
+Your code needs to pass as many unit tests as possible. You don't need to
+write them, they are already ready for you, so no need to do anything there.
+Just focus on finishing as much as possible.
+`;
+
 class IntroductionPage extends Component {
   componentDidMount() {
     highlightCode();
@@ -19,7 +32,7 @@ class IntroductionPage extends Component {
 
     return (
       <Fragment>
-        <h1>Hello Fresh Lightning Code Challenge</h1>
+        <ReactMarkdown source={INTRO} />
         <ReactMarkdown source={instructions} />
         <br />
         <Link to={href} href={href}>
