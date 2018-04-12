@@ -3,9 +3,9 @@
 import React, { Component, Fragment } from 'react';
 import ReactMarkdown from 'react-markdown';
 
-import Link from './elements/Link';
+import Link from '../elements/Link';
 
-import highlightCode from './utils/highlightCode';
+import highlightCode from '../utils/highlightCode';
 
 const introductionText = `
 # Hello Fresh Lightning Code Challenge
@@ -38,7 +38,7 @@ applies the following rules:
 _Additional Notes: Use any additional function you see fit to accomplish the result._
 `;
 
-class Introduction extends Component {
+class IntroductionPage extends Component {
   componentDidMount() {
     highlightCode();
   }
@@ -56,4 +56,4 @@ class Introduction extends Component {
   }
 }
 
-export default Introduction;
+export default IntroductionPage;

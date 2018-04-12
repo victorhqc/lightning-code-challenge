@@ -9,8 +9,8 @@ import createHistory from 'history/createBrowserHistory';
 
 import 'highlight.js/styles/tomorrow.css';
 
-import TestPage from './TestPage';
-import Introduction from './Introduction';
+import TestPage from './pages/TestPage';
+import IntroductionPage from './pages/IntroductionPage';
 
 const Main = styled.div`
   font-family: sans-serif;
@@ -22,7 +22,7 @@ const App = () => (
   <Main>
     <Router history={history}>
       <Switch>
-        <Route exact path="/" component={Introduction} />
+        <Route exact path="/" component={IntroductionPage} />
         <Route path="/test" component={TestPage} />
       </Switch>
     </Router>

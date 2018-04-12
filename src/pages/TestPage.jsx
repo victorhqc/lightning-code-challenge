@@ -10,10 +10,10 @@ import 'brace/theme/tomorrow';
 import {
   saveToStorage,
   getFromStorage,
-} from './utils/storage';
+} from '../utils/storage';
 
-import TestResults from './TestResults';
-import Button from './elements/Button';
+import TestResults from '../components/TestResults';
+import Button from '../elements/Button';
 
 const style = {
   editor: {
