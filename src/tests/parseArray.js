@@ -6,18 +6,18 @@ import {
 } from '../utils/evaluateCode';
 
 export const instructions = `
-# Hello Fresh Lightning Code Challenge
+## Parse Array
 
-## Introduction
+### Introduction
 Follow the instructions to write the piece of code instructed. The more
 tests it passes, the better score you'll get.
 
-## Objective
+### Objective
 Your code needs to pass as many unit tests as possible. You don't need to
 write them, they are already ready for you, so no need to do anything there.
 Just focus on finishing as much as possible.
 
-## Instructions
+### Instructions
 Write a function called **parseElements** that receive an array of objects and
 applies the following rules:
 - The elements inside the new arrays should be ordered by name.

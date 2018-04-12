@@ -19,6 +19,7 @@ class IntroductionPage extends Component {
 
     return (
       <Fragment>
+        <h1>Hello Fresh Lightning Code Challenge</h1>
         <ReactMarkdown source={instructions} />
         <br />
         <Link to={href} href={href}>
