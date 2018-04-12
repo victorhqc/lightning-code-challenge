@@ -25,7 +25,7 @@ class TestPage extends Component {
   constructor(props) {
     super(props);
 
-    const initialCode = props.get('initialCode');
+    const initialCode = props.get(props.path);
 
     this.state = {
       code: initialCode || props.defaultCode,
