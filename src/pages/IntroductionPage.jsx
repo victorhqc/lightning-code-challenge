@@ -17,6 +17,11 @@ passes, the better score you'll get.
 ## Objective
 Your code needs to pass as many unit tests as possible. You don't need to
 write them, they are already ready for you. Just focus on writing the implementation.
+
+## Additional notes
+
+You can go back to the instructions as many times as you need, all the code you write is
+saved every time you refresh the results of your code. **You have 30 minutes to solve the test.**
 `;
 
 class IntroductionPage extends Component {
