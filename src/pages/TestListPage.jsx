@@ -1,14 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import map from 'lodash/map';
+import ReactMarkdown from 'react-markdown';
 
 import Container from '../elements/Container';
+import Link from '../elements/Link';
 
 import { TESTS } from '../constants/tests';
 
+const INTRO = `
+# Lightning Code Challenge
+
+## Introduction
+Welcome to the lightning challenge, this application will try to test your JavaScript knowledge.
+You'll have to write code that passes the predefined unit tests for it. The more tests your code
+passes, the better score you'll get.
+
+## Tests available
+`;
+
 const TestListPage = () => (
   <Container>
-    <h2>Tests available</h2>
+    <ReactMarkdown source={INTRO} />
     <ul>
       {map(TESTS, test => (
         <li key={test.path}>

@@ -36,7 +36,7 @@ injectGlobal`
 
 const Main = styled.div`
   background-color: ${getBackgroundColor};
-  width: 100%;
+  width: calc(100% - (${getPadding}px * 2));
   height: calc(100vh - ${HEADER_HEIGHT}px);
   margin-top: ${HEADER_HEIGHT}px;
   padding: ${getPadding}px;
