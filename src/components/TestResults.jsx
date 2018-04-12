@@ -28,11 +28,11 @@ const getEngineerLevelColor = ({ ratio }) => {
   }
 
   // One half tests pass but less than 4 / 5
-  if (ratio < 4 / 5) {
+  if (ratio < 1) {
     return COLORS.green;
   }
 
-  // 4 / 5 tests or all tests pass
+  // all tests pass
   return COLORS.blue;
 };
 
@@ -45,7 +45,7 @@ const getEngineerLevel = ({ ratio }) => {
     return 'mid';
   }
 
-  if (ratio < 4 / 5) {
+  if (ratio < 1) {
     return 'mid-high';
   }
 

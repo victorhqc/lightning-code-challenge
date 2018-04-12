@@ -86,8 +86,8 @@ export const testCases = code => describe('Foo test', () => {
         email: 'hello@world',
       });
 
-      expect(collection.get('name')).toBe('test');
-      expect(collection.get('email')).toBe('hello@world');
+      expect(collection.name).toBe('test');
+      expect(collection.email).toBe('hello@world');
     }),
 
     it('get method exists', () => {
