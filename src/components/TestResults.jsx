@@ -7,8 +7,6 @@ import highlightCode from '../utils/highlightCode';
 
 import Button from '../elements/Button';
 
-import testCases from '../test/testCases';
-
 const COLORS = {
   red: '#ef476f',
   yellow: '#ffd166',
@@ -99,6 +97,7 @@ class TestsResults extends Component {
   doRefreshResults() {
     const {
       code,
+      testCases,
     } = this.props;
 
     this.setState({
@@ -156,6 +155,7 @@ ${restOfTest.isFailed ? error : ''}
 
 TestsResults.propTypes = {
   code: PropTypes.string.isRequired,
+  testCases: PropTypes.func.isRequired,
 };
 
 export default TestsResults;

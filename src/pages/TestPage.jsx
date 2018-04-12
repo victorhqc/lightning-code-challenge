@@ -21,15 +21,6 @@ const style = {
   },
 };
 
-const INITIAL_CODE = `// Do not edit anything outside this scope.
-function test() {
-    // Your code goes here. Feel free to add as many functions as you see fit.
-    function parseElements() {
-    }
-
-return parseElements;
-}`;
-
 class TestPage extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +28,7 @@ class TestPage extends Component {
     const initialCode = props.get('initialCode');
 
     this.state = {
-      code: initialCode || INITIAL_CODE,
+      code: initialCode || props.defaultCode,
     };
 
     this.doChange = this.doChange.bind(this);
@@ -47,9 +38,10 @@ class TestPage extends Component {
   doChange(code) {
     const {
       save,
+      href,
     } = this.props;
 
-    save('initialCode', code);
+    save(href, code);
 
     this.setState({
       code,
@@ -59,12 +51,14 @@ class TestPage extends Component {
   clearCode() {
     const {
       save,
+      href,
+      defaultCode,
     } = this.props;
 
-    save('initialCode', '');
+    save(href, '');
 
     this.setState({
-      code: INITIAL_CODE,
+      code: defaultCode,
     });
   }
 
@@ -72,6 +66,10 @@ class TestPage extends Component {
     const {
       code,
     } = this.state;
+
+    const {
+      testCases,
+    } = this.props;
 
     return (
       <Flex>
@@ -92,7 +90,7 @@ class TestPage extends Component {
           </Button>
         </Box>
         <Box width={1 / 2} px={2}>
-          <TestResults code={code} />
+          <TestResults code={code} testCases={testCases} />
         </Box>
       </Flex>
     );
@@ -100,6 +98,10 @@ class TestPage extends Component {
 }
 
 TestPage.propTypes = {
+  defaultCode: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+  testCases: PropTypes.func.isRequired,
+
   get: PropTypes.func.isRequired,
   save: PropTypes.func.isRequired,
 };

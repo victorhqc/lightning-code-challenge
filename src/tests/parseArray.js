@@ -5,7 +5,38 @@ import {
   parseTextToCode,
 } from '../utils/evaluateCode';
 
-const testCases = code => describe('Foo test', () => {
+export const instructions = `
+# Hello Fresh Lightning Code Challenge
+
+## Introduction
+Follow the instructions to write the piece of code instructed. The more
+tests it passes, the better score you'll get.
+
+## Objective
+Your code needs to pass as many unit tests as possible. You don't need to
+write them, they are already ready for you, so no need to do anything there.
+Just focus on finishing as much as possible.
+
+## Instructions
+Write a function called **parseElements** that receive an array of objects and
+applies the following rules:
+- The elements inside the new arrays should be ordered by name.
+- The elements that have **isActive** as false, should not be included.
+- It returns a new object with keys based in the element's type, i.e.
+  \`\`\`js
+  var array = [{type: 'foo'}, {type: 'bar'}];
+  // returns
+  var parsedObject = {
+    foo: [{ type: 'foo' }],
+    bar: [{ type: 'bar' }]
+  };
+  \`\`\`
+- No mutations should exist.
+
+_Additional Notes: Use any additional function you see fit to accomplish the result._
+`;
+
+export const testCases = code => describe('Foo test', () => {
   const parsedCode = parseTextToCode(code)();
 
   return [
@@ -75,4 +106,11 @@ const testCases = code => describe('Foo test', () => {
   ];
 });
 
-export default testCases;
+export const defaultCode = `// Do not edit anything outside this scope.
+function test() {
+    // Your code goes here. Feel free to add as many functions as you see fit.
+    function parseElements() {
+    }
+
+    return parseElements;
+}`;
