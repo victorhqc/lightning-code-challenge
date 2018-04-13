@@ -10,7 +10,10 @@ import reduce from 'lodash/reduce';
 
 import 'highlight.js/styles/monokai.css';
 
-import TopHeader from './elements/TopHeader';
+import TopHeader from './components/TopHeader';
+import SideBar from './components/SideBar';
+
+import { Flex, Box } from './elements/Grid';
 
 import IntroductionPage from './pages/IntroductionPage';
 import TestPage from './pages/TestPage';
@@ -71,12 +74,19 @@ const App = () => (
       <Fragment>
         <TopHeader />
         <Main>
-          <Switch>
-            <Route exact path="/" component={TestListPage} />
-            {addRoutes().map(route => (
-              <RouteWithSubRoutes key={route.path} {...route} />
-            ))}
-          </Switch>
+          <Flex>
+            <Box width={1 / 6}>
+              <SideBar />
+            </Box>
+            <Box width={5 / 6}>
+              <Switch>
+                <Route exact path="/" component={TestListPage} />
+                {addRoutes().map(route => (
+                  <RouteWithSubRoutes key={route.path} {...route} />
+                ))}
+              </Switch>
+            </Box>
+          </Flex>
         </Main>
       </Fragment>
     </ThemeProvider>

@@ -1,11 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { withRouter } from 'react-router';
 
 import {
   getComplementBackgroundColor,
+  getBackgroundColor,
   getComplementColor,
+  getAccentColor,
 
   getMargin,
   marginProps,
@@ -13,8 +14,13 @@ import {
   getPadding,
   paddingProps,
 } from '../utils/theme';
+import {
+  getTestPathFromLocation,
+  isPathnameInInstructions,
+  withRouterProps,
+} from '../utils/router';
 
-import Link from './Link';
+import Link from '../elements/Link';
 
 import { HEADER_HEIGHT } from '../constants/theme';
 
@@ -49,8 +55,26 @@ Brand.propTypes = {
   ...paddingProps,
 };
 
+const Button = styled.button`
+  background-color: transparent;
+  color: ${getComplementColor};
+  border: none;
+  cursor: pointer;
+  outline: none;
+  height: 100%;
+  font-size: 0.9em;
+  border-bottom: 2px solid transparent;
+
+  &:hover {
+    border-bottom: 2px solid ${getAccentColor};
+  }
+
+  &:active {
+    background: ${getBackgroundColor};
+  }
+`;
+
 const Nav = styled.nav`
-  padding-top: 18px;
   margin-left: ${getMargin}px;
 
   a {
@@ -63,43 +87,26 @@ Nav.propTypes = {
   ...marginProps,
 };
 
-const Navigation = ({ location }) => {
-  const { pathname } = location;
-
-  if (
-    !pathname
-    || pathname === '/'
-  ) {
+const Navigation = (props) => {
+  const testPathname = getTestPathFromLocation(props);
+  if (!testPathname || isPathnameInInstructions(props)) {
     return null;
   }
 
-  const pathnameMatch = pathname.match(/\/[a-z-]+/g);
-  const testPathname = pathnameMatch[pathnameMatch.length - 1];
-
   return (
     <Nav margin="large">
-      <Link
-        margin="small"
-        to={`/intro${testPathname}`}
-        href={`/intro${testPathname}`}
-      >
-        Introduction
-      </Link>
-      <Link
-        margin="small"
-        to={testPathname}
-        href={testPathname}
-      >
-        Test
-      </Link>
+      <Button>
+        <span role="img" aria-label="">
+          🔥
+        </span>
+        {' '}Run
+      </Button>
     </Nav>
   );
 };
 
 Navigation.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
+  ...withRouterProps,
 };
 
 const TopHeader = props => (
@@ -109,7 +116,7 @@ const TopHeader = props => (
         <span role="img" aria-label="lightning">
           ⚡
         </span>
-        code challenge
+        Code Challenge
       </Link>
     </Brand>
     <Navigation {...props} />

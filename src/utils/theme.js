@@ -23,6 +23,11 @@ export const getComplementColor = theme('mode', {
   dark: '#fbfbfb',
 });
 
+export const getAccentColor = theme('mode', {
+  dark: '#118ab2',
+  light: '#06d6a0',
+});
+
 const getSpacingFactory = propName => theme.variants('size', propName, {
   default: { normal: SPACING.normal.md, compact: SPACING.compact.md },
   xsmall: { normal: SPACING.normal.xs, compact: SPACING.compact.xs },
