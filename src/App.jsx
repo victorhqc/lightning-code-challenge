@@ -8,7 +8,7 @@ import {
 import createHistory from 'history/createBrowserHistory';
 import reduce from 'lodash/reduce';
 
-import 'highlight.js/styles/tomorrow.css';
+import 'highlight.js/styles/monokai.css';
 
 import TopHeader from './elements/TopHeader';
 

@@ -5,7 +5,7 @@ import { mapProps } from 'recompose';
 import { Flex, Box } from 'grid-styled';
 
 import 'brace/mode/javascript';
-import 'brace/theme/tomorrow';
+import 'brace/theme/monokai';
 
 import {
   saveToStorage,
@@ -84,7 +84,7 @@ class TestPage extends Component {
                 spellcheck: false,
               }}
               mode="javascript"
-              theme="tomorrow"
+              theme="monokai"
             />
             <br />
             <Button onClick={this.clearCode} color="red">
