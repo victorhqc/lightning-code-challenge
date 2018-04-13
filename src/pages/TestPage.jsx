@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AceEditor from 'react-ace';
 import { mapProps } from 'recompose';
-import { Flex, Box } from 'grid-styled';
 
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
@@ -12,6 +11,9 @@ import {
   getFromStorage,
 } from '../utils/storage';
 
+import { getMargin } from '../utils/theme';
+
+import { Flex, Box } from '../elements/Grid';
 import TestResults from '../components/TestResults';
 import Container from '../elements/Container';
 import Button from '../elements/Button';
@@ -73,29 +75,27 @@ class TestPage extends Component {
     } = this.props;
 
     return (
-      <Container>
-        <Flex>
-          <Box width={2 / 3} px={2}>
-            <AceEditor
-              style={style.editor}
-              onChange={this.doChange}
-              value={code}
-              setOptions={{
-                spellcheck: false,
-              }}
-              mode="javascript"
-              theme="monokai"
-            />
-            <br />
-            <Button onClick={this.clearCode} color="red">
-              🗑 Clear code
-            </Button>
-          </Box>
-          <Box width={1 / 3} px={2}>
-            <TestResults code={code} testCases={testCases} />
-          </Box>
-        </Flex>
-      </Container>
+      <Flex marginX="-xsmall">
+        <Box width={2 / 3} px={getMargin} marginX="xsmall">
+          <AceEditor
+            style={style.editor}
+            onChange={this.doChange}
+            value={code}
+            setOptions={{
+              spellcheck: false,
+            }}
+            mode="javascript"
+            theme="monokai"
+          />
+          <br />
+          <Button onClick={this.clearCode} color="red">
+            🗑 Clear code
+          </Button>
+        </Box>
+        <Box width={1 / 3} px={getMargin} marginX="xsmall">
+          <TestResults code={code} testCases={testCases} />
+        </Box>
+      </Flex>
     );
   }
 }
