@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import AceEditor from 'react-ace';
 import { mapProps } from 'recompose';
 
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
+
+import storeActiveTest, { activeTestProps } from '../store/activeTest';
 
 import {
   saveToStorage,
@@ -26,9 +30,8 @@ class TestPage extends Component {
     super(props);
 
     const initialCode = props.get(props.path);
-
     this.state = {
-      code: initialCode || props.defaultCode,
+      code: initialCode || props.activeTest.defaultCode,
     };
 
     this.doChange = this.doChange.bind(this);
@@ -52,8 +55,12 @@ class TestPage extends Component {
     const {
       save,
       path,
-      defaultCode,
+      activeTest,
     } = this.props;
+
+    const {
+      defaultCode,
+    } = activeTest;
 
     save(path, '');
 
@@ -68,8 +75,12 @@ class TestPage extends Component {
     } = this.state;
 
     const {
-      testCases,
+      activeTest,
     } = this.props;
+
+    if (!activeTest) {
+      return null;
+    }
 
     return (
       <Flex marginx="-xsmall">
@@ -90,7 +101,7 @@ class TestPage extends Component {
           </Button>
         </Box>
         <Box width={1 / 3} marginx="xsmall">
-          <TestResults code={code} testCases={testCases} />
+          <TestResults code={code} testCases={activeTest.testCases} />
         </Box>
       </Flex>
     );
@@ -98,13 +109,15 @@ class TestPage extends Component {
 }
 
 TestPage.propTypes = {
-  defaultCode: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
-  testCases: PropTypes.func.isRequired,
+  ...activeTestProps,
 
   get: PropTypes.func.isRequired,
   save: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = state => ({
+  activeTest: storeActiveTest.selectors.getActiveTest(state),
+});
 
 const mappedProps = mapProps(props => ({
   ...props,
@@ -112,4 +125,7 @@ const mappedProps = mapProps(props => ({
   save: saveToStorage,
 }));
 
-export default mappedProps(TestPage);
+export default compose(
+  mappedProps,
+  connect(mapStateToProps),
+)(TestPage);

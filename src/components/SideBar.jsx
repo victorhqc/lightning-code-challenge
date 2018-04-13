@@ -97,7 +97,6 @@ class SideBar extends Component {
     } = props;
 
     if (testByPathName) {
-      console.log(':D!');
       setActiveTest(testByPathName.name);
     }
   }
@@ -111,7 +110,6 @@ class SideBar extends Component {
     if (
       !isEqual(testByPathName, nextProps.testByPathName)
     ) {
-      console.log(':D! again');
       setActiveTest(testByPathName.name);
     }
   }

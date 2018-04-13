@@ -1,4 +1,5 @@
 import autodux from 'autodux';
+import PropTypes from 'prop-types';
 import find from 'lodash/find';
 
 import { TESTS } from '../constants/tests';
@@ -12,3 +13,13 @@ const activeTest = autodux({
 });
 
 export default activeTest;
+
+
+export const activeTestProps = {
+  activeTest: PropTypes.shape({
+    instructions: PropTypes.string.isRequired,
+    path: PropTypes.string.isRequired,
+    defaultCode: PropTypes.string.isRequired,
+    testCases: PropTypes.func.isRequired,
+  }),
+};
