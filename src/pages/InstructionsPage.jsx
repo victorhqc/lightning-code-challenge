@@ -53,7 +53,7 @@ IntroductionPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  getActiveTest: storeActiveTest.selectors.getActiveTest(state),
+  activeTest: storeActiveTest.selectors.getActiveTest(state),
 });
 
 export default connect(mapStateToProps)(IntroductionPage);

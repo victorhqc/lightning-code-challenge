@@ -15,7 +15,7 @@ const tests = autodux({
     })),
   },
   selectors: {
-    getTestByPathName: (state, pathname) => find(state, test => test.path === pathname),
+    getTestByPathName: state => pathname => find(state, test => test.path === pathname),
   },
 });
 

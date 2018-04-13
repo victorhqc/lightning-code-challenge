@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import styled from 'styled-components';
 import { withRouter } from 'react-router';
 import map from 'lodash/map';
+import isEqual from 'lodash/isEqual';
 
 import storeActiveTest from '../store/activeTest';
 import storeTests, { testsPropTypes, testPropTypes } from '../store/tests';
@@ -86,26 +87,55 @@ Navigation.propTypes = {
   ...testsPropTypes,
 };
 
-const SideBar = props => (
-  <StyledContainer padding="default">
-    <Navigation {...props} />
-  </StyledContainer>
-);
+class SideBar extends Component {
+  constructor(props) {
+    super(props);
+
+    const {
+      setActiveTest,
+      testByPathName,
+    } = props;
+
+    if (testByPathName) {
+      console.log(':D!');
+      setActiveTest(testByPathName.name);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      testByPathName,
+      setActiveTest,
+    } = this.props;
+
+    if (
+      !isEqual(testByPathName, nextProps.testByPathName)
+    ) {
+      console.log(':D! again');
+      setActiveTest(testByPathName.name);
+    }
+  }
+
+  render() {
+    return (
+      <StyledContainer padding="default">
+        <Navigation {...this.props} />
+      </StyledContainer>
+    );
+  }
+}
 
 SideBar.propTypes = {
   ...withRouterProps,
 };
 
 const mapStateToProps = (state, props) => ({
-  testByPathName: storeTests.selectors.getTestByPathName(
-    state,
-    getTestPathFromLocation(props),
-  ),
+  testByPathName: storeTests.selectors.getTestByPathName(state)(getTestPathFromLocation(props)),
   tests: storeTests.selectors.getTests(state),
 });
 
 const mapDispatchToProps = {
-  setActiveTest: storeActiveTest.actions.storeActiveTest,
+  setActiveTest: storeActiveTest.actions.setActiveTest,
 };
 
 export default compose(

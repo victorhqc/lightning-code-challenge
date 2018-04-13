@@ -7,7 +7,7 @@ const activeTest = autodux({
   slice: 'activeTest',
   initial: {},
   actions: {
-    setActiveTest: name => find(TESTS, test => test.name === name),
+    setActiveTest: (state, name) => find(TESTS, test => test.name === name),
   },
 });
 
