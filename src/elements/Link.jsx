@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link as ReactRouterLink } from 'react-router-dom';
 
-import { getColor } from '../utils/theme';
+import { getColor, getMargin, marginProps } from '../utils/theme';
 
 const Link = ({ className, children, ...restOfProps }) => (
   <ReactRouterLink
@@ -25,6 +25,11 @@ Link.propTypes = {
 
 const StyledLink = styled(Link)`
   color: ${getColor};
+  margin: 0 ${getMargin}px;
 `;
+
+StyledLink.propTypes = {
+  ...marginProps,
+};
 
 export default StyledLink;

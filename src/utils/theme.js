@@ -1,7 +1,7 @@
 import theme from 'styled-theming';
 import PropTypes from 'prop-types';
 
-import { PADDING } from '../constants/theme';
+import { SPACING } from '../constants/theme';
 
 export const getBackgroundColor = theme('mode', {
   light: '#fff',
@@ -23,14 +23,20 @@ export const getComplementColor = theme('mode', {
   dark: '#fbfbfb',
 });
 
-export const getPadding = theme.variants('size', 'padding', {
-  default: { normal: PADDING.normal.md, compact: PADDING.compact.md },
-  xsmall: { normal: PADDING.normal.xs, compact: PADDING.compact.xs },
-  small: { normal: PADDING.normal.sm, compact: PADDING.compact.sm },
-  large: { normal: PADDING.normal.lg, compact: PADDING.compact.lg },
-  xlarge: { normal: PADDING.normal.xl, compact: PADDING.compact.xl },
+const getSpacingFactory = propName => theme.variants('size', propName, {
+  default: { normal: SPACING.normal.md, compact: SPACING.compact.md },
+  xsmall: { normal: SPACING.normal.xs, compact: SPACING.compact.xs },
+  small: { normal: SPACING.normal.sm, compact: SPACING.compact.sm },
+  large: { normal: SPACING.normal.lg, compact: SPACING.compact.lg },
+  xlarge: { normal: SPACING.normal.xl, compact: SPACING.compact.xl },
 });
 
-export const paddingProps = {
-  padding: PropTypes.oneOf(['default', 'xsmall', 'small', 'large', 'xlarge']),
-};
+const paddingPropsFactory = propName => ({
+  [propName]: PropTypes.oneOf(['default', 'xsmall', 'small', 'large', 'xlarge']),
+});
+
+export const getPadding = getSpacingFactory('padding');
+export const getMargin = getSpacingFactory('margin');
+
+export const paddingProps = paddingPropsFactory('padding');
+export const marginProps = paddingPropsFactory('margin');

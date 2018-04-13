@@ -2,7 +2,7 @@
 
 export const HEADER_HEIGHT = 50;
 
-export const PADDING = {
+export const SPACING = {
   normal: {
     xs: 5,
     sm: 8,
