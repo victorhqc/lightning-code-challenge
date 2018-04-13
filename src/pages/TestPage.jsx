@@ -15,7 +15,6 @@ import { getMargin } from '../utils/theme';
 
 import { Flex, Box } from '../elements/Grid';
 import TestResults from '../components/TestResults';
-import Container from '../elements/Container';
 import Button from '../elements/Button';
 
 const style = {
