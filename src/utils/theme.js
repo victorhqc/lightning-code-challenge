@@ -67,7 +67,7 @@ const spacingPropsFactory = propName => ({
 export const getPadding = getSpacingFactory('padding');
 
 export const getMargin = getSpacingFactory('margin');
-export const getMarginY = getSpacingFactory('marginx');
+export const getMarginY = getSpacingFactory('marginy');
 export const getMarginX = getSpacingFactory('marginx');
 
 export const paddingProps = spacingPropsFactory('padding');

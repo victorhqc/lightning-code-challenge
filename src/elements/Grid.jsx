@@ -38,6 +38,8 @@ StyledFlex.propTypes = {
 
 
 export const Flex = styled(StyledFlex)`
+  height: 100%;
+
   margin: ${getMargin}px;
   margin-top: ${getMarginY}px;
   margin-bottom: ${getMarginY}px;
@@ -74,6 +76,8 @@ StyledBox.propTypes = {
 
 
 export const Box = styled(StyledBox)`
+  height: 100%;
+
   margin: ${getMargin}px;
   margin-top: ${getMarginY}px;
   margin-bottom: ${getMarginY}px;

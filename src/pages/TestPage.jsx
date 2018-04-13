@@ -18,11 +18,20 @@ import {
 
 import { Flex, Box } from '../elements/Grid';
 import TestResults from '../components/TestResults';
-import Button from '../elements/Button';
+
+const StyledFlex = Flex.extend`
+  height: 100%;
+`;
+
+const StyledBox = Box.extend`
+  height: 100%;
+  overflow: auto;
+`;
 
 const style = {
   editor: {
     width: '100%',
+    height: '100%',
   },
 };
 
@@ -94,7 +103,7 @@ class TestPage extends Component {
     }
 
     return (
-      <Flex marginx="-xsmall">
+      <StyledFlex>
         <Box width={2 / 3} marginx="xsmall">
           <AceEditor
             style={style.editor}
@@ -107,10 +116,10 @@ class TestPage extends Component {
             theme="monokai"
           />
         </Box>
-        <Box width={1 / 3} marginx="xsmall">
+        <StyledBox width={1 / 3} marginx="xsmall">
           <TestResults code={code} testCases={activeTest.testCases} />
-        </Box>
-      </Flex>
+        </StyledBox>
+      </StyledFlex>
     );
   }
 }

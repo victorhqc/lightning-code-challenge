@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -7,6 +7,8 @@ import ReactMarkdown from 'react-markdown';
 import codeResults, { updatedAtProps } from '../store/codeResults';
 
 import highlightCode from '../utils/highlightCode';
+
+import Container from '../elements/Container';
 
 const COLORS = {
   red: '#ef476f',
@@ -74,7 +76,6 @@ const TestResultsContainer = styled.ul`
   margin: 0;
   list-style: none;
   padding: 0;
-  height: 70vh;
   overflow: auto;
 `;
 
@@ -165,10 +166,10 @@ ${restOfTest.isFailed ? error : ''}
 
   render() {
     return (
-      <Fragment>
+      <Container>
         {this.renderEngineerLevel()}
         {this.renderTestResults()}
-      </Fragment>
+      </Container>
     );
   }
 }
