@@ -108,9 +108,10 @@ class SideBar extends Component {
     } = this.props;
 
     if (
-      !isEqual(testByPathName, nextProps.testByPathName)
+      nextProps.testByPathName
+      && !isEqual(testByPathName, nextProps.testByPathName)
     ) {
-      setActiveTest(testByPathName.name);
+      setActiveTest(nextProps.testByPathName.name);
     }
   }
 

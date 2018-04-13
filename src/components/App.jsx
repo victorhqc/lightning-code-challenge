@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import {
   Route,
   Switch,
+  withRouter,
 } from 'react-router';
 import reduce from 'lodash/reduce';
 
@@ -111,4 +113,7 @@ const mapDispatchToProps = {
   setDefaultTests: storeTests.actions.setDefaultTests,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
+)(App);
