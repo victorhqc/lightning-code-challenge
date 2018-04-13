@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
+import { Provider } from 'react-redux';
+import { ConnectedRouter as Router } from 'react-router-redux';
 import styled, { ThemeProvider, injectGlobal } from 'styled-components';
 import {
-  Router,
   Route,
   Switch,
 } from 'react-router';
@@ -24,6 +25,8 @@ import { HEADER_HEIGHT } from './constants/theme';
 
 import { getBackgroundColor } from './utils/theme';
 
+import configureStore from './store';
+
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
   body {
@@ -41,6 +44,8 @@ const Main = styled.div`
 `;
 
 const history = createHistory();
+
+const store = configureStore({}, history);
 
 const mapTest = (WrappedComponent, route) => props => (
   <WrappedComponent {...props} {...route.test} />
@@ -69,28 +74,30 @@ const RouteWithSubRoutes = route => (
 );
 
 const App = () => (
-  <Router history={history}>
-    <ThemeProvider theme={{ mode: 'dark', size: 'normal' }}>
-      <Fragment>
-        <TopHeader />
-        <Main>
-          <Flex>
-            <Box width={1 / 6}>
-              <SideBar />
-            </Box>
-            <Box width={5 / 6}>
-              <Switch>
-                <Route exact path="/" component={AboutPage} />
-                {addRoutes().map(route => (
-                  <RouteWithSubRoutes key={route.path} {...route} />
-                ))}
-              </Switch>
-            </Box>
-          </Flex>
-        </Main>
-      </Fragment>
-    </ThemeProvider>
-  </Router>
+  <Provider store={store}>
+    <Router history={history}>
+      <ThemeProvider theme={{ mode: 'dark', size: 'normal' }}>
+        <Fragment>
+          <TopHeader />
+          <Main>
+            <Flex>
+              <Box width={1 / 6}>
+                <SideBar />
+              </Box>
+              <Box width={5 / 6}>
+                <Switch>
+                  <Route exact path="/" component={AboutPage} />
+                  {addRoutes().map(route => (
+                    <RouteWithSubRoutes key={route.path} {...route} />
+                  ))}
+                </Switch>
+              </Box>
+            </Flex>
+          </Main>
+        </Fragment>
+      </ThemeProvider>
+    </Router>
+  </Provider>
 );
 
 export default App;
