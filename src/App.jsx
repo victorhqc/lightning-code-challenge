@@ -15,9 +15,9 @@ import SideBar from './components/SideBar';
 
 import { Flex, Box } from './elements/Grid';
 
-import IntroductionPage from './pages/IntroductionPage';
+import InstructionsPage from './pages/InstructionsPage';
 import TestPage from './pages/TestPage';
-import TestListPage from './pages/TestListPage';
+import AboutPage from './pages/AboutPage';
 
 import { TESTS } from './constants/tests';
 import { HEADER_HEIGHT } from './constants/theme';
@@ -55,7 +55,7 @@ const addRoutes = () => reduce(TESTS, (prev, test) => ([
   },
   {
     path: `/intro${test.path}`,
-    component: IntroductionPage,
+    component: InstructionsPage,
     test,
   },
 ]), []);
@@ -80,7 +80,7 @@ const App = () => (
             </Box>
             <Box width={5 / 6}>
               <Switch>
-                <Route exact path="/" component={TestListPage} />
+                <Route exact path="/" component={AboutPage} />
                 {addRoutes().map(route => (
                   <RouteWithSubRoutes key={route.path} {...route} />
                 ))}

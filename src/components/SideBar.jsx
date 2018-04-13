@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router';
+import map from 'lodash/map';
+
+import { TESTS } from '../constants/tests';
 
 import { getColor } from '../utils/theme';
 import {
@@ -28,7 +31,20 @@ const StyledContainer = Container.extend`
 const Navigation = (props) => {
   const testPathname = getTestPathFromLocation(props);
   if (!testPathname) {
-    return null;
+    return (
+      <Fragment>
+        <h4>Tests available</h4>
+        <Nav>
+          {map(TESTS, test => (
+            <li key={test.path}>
+              <Link href={`/intro${test.path}`} to={`/intro${test.path}`}>
+                {test.name}
+              </Link>
+            </li>
+          ))}
+        </Nav>
+      </Fragment>
+    );
   }
 
   if (isPathnameInInstructions(props)) {
@@ -56,7 +72,6 @@ const Navigation = (props) => {
 
 const SideBar = props => (
   <StyledContainer padding="default">
-    <h4>Meta</h4>
     <Navigation {...props} />
   </StyledContainer>
 );
