@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
+
+import storeActiveTest from '../store/activeTest';
 
 import Container from '../elements/Container';
 import Link from '../elements/Link';
@@ -14,9 +17,17 @@ class IntroductionPage extends Component {
 
   render() {
     const {
+      activeTest,
+    } = this.props;
+
+    if (!activeTest) {
+      return null;
+    }
+
+    const {
       instructions,
       path,
-    } = this.props;
+    } = activeTest;
 
     return (
       <Container padding="default">
@@ -30,9 +41,19 @@ class IntroductionPage extends Component {
   }
 }
 
-IntroductionPage.propTypes = {
-  instructions: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
+IntroductionPage.defaultProps = {
+  activeTest: null,
 };
 
-export default IntroductionPage;
+IntroductionPage.propTypes = {
+  activeTest: PropTypes.shape({
+    instructions: PropTypes.string.isRequired,
+    path: PropTypes.string.isRequired,
+  }),
+};
+
+const mapStateToProps = state => ({
+  getActiveTest: storeActiveTest.selectors.getActiveTest(state),
+});
+
+export default connect(mapStateToProps)(IntroductionPage);

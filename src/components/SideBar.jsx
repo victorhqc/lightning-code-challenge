@@ -1,9 +1,12 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import styled from 'styled-components';
 import { withRouter } from 'react-router';
 import map from 'lodash/map';
 
-import { TESTS } from '../constants/tests';
+import storeActiveTest from '../store/activeTest';
+import storeTests, { testsPropTypes, testPropTypes } from '../store/tests';
 
 import {
   getColor,
@@ -33,13 +36,17 @@ const StyledContainer = Container.extend`
 `;
 
 const Navigation = (props) => {
-  const testPathname = getTestPathFromLocation(props);
-  if (!testPathname) {
+  const {
+    testByPathName,
+    tests,
+  } = props;
+
+  if (!testByPathName) {
     return (
       <Fragment>
         <h4>Tests available</h4>
         <Nav>
-          {map(TESTS, test => (
+          {map(tests, test => (
             <li key={test.path}>
               <Link href={`/intro${test.path}`} to={`/intro${test.path}`}>
                 {test.name}
@@ -55,8 +62,8 @@ const Navigation = (props) => {
     return (
       <Link
         margin="small"
-        to={testPathname}
-        href={testPathname}
+        to={testByPathName.path}
+        href={testByPathName.path}
       >
         Test
       </Link>
@@ -66,12 +73,17 @@ const Navigation = (props) => {
   return (
     <Link
       margin="small"
-      to={`/intro${testPathname}`}
-      href={`/intro${testPathname}`}
+      to={`/intro${testByPathName.path}`}
+      href={`/intro${testByPathName.path}`}
     >
       Instructions
     </Link>
   );
+};
+
+Navigation.propTypes = {
+  ...testPropTypes,
+  ...testsPropTypes,
 };
 
 const SideBar = props => (
@@ -84,4 +96,19 @@ SideBar.propTypes = {
   ...withRouterProps,
 };
 
-export default withRouter(SideBar);
+const mapStateToProps = (state, props) => ({
+  testByPathName: storeTests.selectors.getTestByPathName(
+    state,
+    getTestPathFromLocation(props),
+  ),
+  tests: storeTests.selectors.getTests(state),
+});
+
+const mapDispatchToProps = {
+  setActiveTest: storeActiveTest.actions.storeActiveTest,
+};
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
+)(SideBar);

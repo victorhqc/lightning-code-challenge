@@ -10,7 +10,7 @@ import reduce from 'lodash/reduce';
 
 import 'highlight.js/styles/monokai.css';
 
-import storeTests from '../store/tests';
+import storeTests, { testsPropTypes } from '../store/tests';
 
 import TopHeader from './TopHeader';
 import SideBar from './SideBar';
@@ -100,10 +100,7 @@ class App extends Component {
 
 App.propTypes = {
   setDefaultTests: PropTypes.func.isRequired,
-  tests: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string,
-    path: PropTypes.string,
-  })).isRequired,
+  ...testsPropTypes,
 };
 
 const mapStateToProps = state => ({
