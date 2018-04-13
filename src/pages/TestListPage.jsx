@@ -23,7 +23,7 @@ write them, they are already ready for you. Just focus on writing the implementa
 `;
 
 const TestListPage = () => (
-  <Container>
+  <Container padding="default">
     <ReactMarkdown source={INTRO} />
     <ul>
       {map(TESTS, test => (

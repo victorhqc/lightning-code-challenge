@@ -19,7 +19,7 @@ class IntroductionPage extends Component {
     } = this.props;
 
     return (
-      <Container>
+      <Container padding="default">
         <ReactMarkdown source={instructions} />
         <br />
         <Link to={path} href={path}>

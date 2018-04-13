@@ -19,11 +19,7 @@ import TestListPage from './pages/TestListPage';
 import { TESTS } from './constants/tests';
 import { HEADER_HEIGHT } from './constants/theme';
 
-import {
-  getBackgroundColor,
-  getPadding,
-  paddingProps,
-} from './utils/theme';
+import { getBackgroundColor } from './utils/theme';
 
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
@@ -36,15 +32,10 @@ injectGlobal`
 
 const Main = styled.div`
   background-color: ${getBackgroundColor};
-  width: calc(100% - (${getPadding}px * 2));
-  height: calc(100vh - ${HEADER_HEIGHT}px - (${getPadding}px * 2));
+  width: 100%;
+  height: calc(100vh - ${HEADER_HEIGHT}px);
   margin-top: ${HEADER_HEIGHT}px;
-  padding: ${getPadding}px;
 `;
-
-Main.propTypes = {
-  ...paddingProps,
-};
 
 const history = createHistory();
 
@@ -79,7 +70,7 @@ const App = () => (
     <ThemeProvider theme={{ mode: 'dark', size: 'normal' }}>
       <Fragment>
         <TopHeader />
-        <Main padding="default">
+        <Main>
           <Switch>
             <Route exact path="/" component={TestListPage} />
             {addRoutes().map(route => (
