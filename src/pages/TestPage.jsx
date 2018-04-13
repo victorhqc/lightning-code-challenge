@@ -9,6 +9,7 @@ import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 
 import storeActiveTest, { activeTestProps } from '../store/activeTest';
+import codeResults, { clearedAtProps } from '../store/codeResults';
 
 import {
   saveToStorage,
@@ -36,6 +37,16 @@ class TestPage extends Component {
 
     this.doChange = this.doChange.bind(this);
     this.clearCode = this.clearCode.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      clearedAt,
+    } = this.props;
+
+    if (clearedAt !== nextProps.clearedAt) {
+      this.clearCode();
+    }
   }
 
   doChange(code) {
@@ -95,10 +106,6 @@ class TestPage extends Component {
             mode="javascript"
             theme="monokai"
           />
-          <br />
-          <Button onClick={this.clearCode} color="red">
-            🗑 Clear code
-          </Button>
         </Box>
         <Box width={1 / 3} marginx="xsmall">
           <TestResults code={code} testCases={activeTest.testCases} />
@@ -110,6 +117,7 @@ class TestPage extends Component {
 
 TestPage.propTypes = {
   ...activeTestProps,
+  ...clearedAtProps,
 
   get: PropTypes.func.isRequired,
   save: PropTypes.func.isRequired,
@@ -117,6 +125,7 @@ TestPage.propTypes = {
 
 const mapStateToProps = state => ({
   activeTest: storeActiveTest.selectors.getActiveTest(state),
+  clearedAt: codeResults.selectors.getClearedAt(state),
 });
 
 const mappedProps = mapProps(props => ({
