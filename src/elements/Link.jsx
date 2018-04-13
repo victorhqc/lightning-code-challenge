@@ -20,7 +20,11 @@ Link.defaultProps = {
 
 Link.propTypes = {
   className: PropTypes.string.isRequired,
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.element,
+  ]),
 };
 
 const StyledLink = styled(Link)`

@@ -30,7 +30,10 @@ StyledFlex.defaultProps = {
 
 StyledFlex.propTypes = {
   className: PropTypes.string.isRequired,
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.element,
+  ]),
 };
 
 
@@ -63,7 +66,10 @@ StyledBox.defaultProps = {
 
 StyledBox.propTypes = {
   className: PropTypes.string.isRequired,
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.element,
+  ]),
 };
 
 
