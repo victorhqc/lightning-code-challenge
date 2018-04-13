@@ -1,7 +1,11 @@
 import theme from 'styled-theming';
 import PropTypes from 'prop-types';
 
-import { SPACING } from '../constants/theme';
+import { SPACING, HEADER_HEIGHT } from '../constants/theme';
+
+export const getHeaderHeight = () => HEADER_HEIGHT;
+
+export const getAllHeight = () => `calc(100vh - ${getHeaderHeight()}px)`;
 
 export const getBackgroundColor = theme('mode', {
   light: '#fff',

@@ -21,9 +21,12 @@ import TestPage from './pages/TestPage';
 import AboutPage from './pages/AboutPage';
 
 import { TESTS } from './constants/tests';
-import { HEADER_HEIGHT } from './constants/theme';
 
-import { getBackgroundColor } from './utils/theme';
+import {
+  getBackgroundColor,
+  getAllHeight,
+  getHeaderHeight,
+} from './utils/theme';
 
 import configureStore from './store';
 
@@ -39,8 +42,8 @@ injectGlobal`
 const Main = styled.div`
   background-color: ${getBackgroundColor};
   width: 100%;
-  height: calc(100vh - ${HEADER_HEIGHT}px);
-  margin-top: ${HEADER_HEIGHT}px;
+  height: ${getAllHeight};
+  margin-top: ${getHeaderHeight}px;
 `;
 
 const history = createHistory();

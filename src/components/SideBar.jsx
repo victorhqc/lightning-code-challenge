@@ -5,7 +5,11 @@ import map from 'lodash/map';
 
 import { TESTS } from '../constants/tests';
 
-import { getColor } from '../utils/theme';
+import {
+  getColor,
+  getHeaderHeight,
+  getPadding,
+} from '../utils/theme';
 import {
   getTestPathFromLocation,
   isPathnameInInstructions,
@@ -21,7 +25,7 @@ const Nav = styled.nav`
 
 const StyledContainer = Container.extend`
   border-right: 1px solid ${getColor}10;
-  height: 100vh;
+  height: calc(100vh - ${getHeaderHeight}px - (${getPadding}px * 2));
 
   h4 {
     margin-top: 0;

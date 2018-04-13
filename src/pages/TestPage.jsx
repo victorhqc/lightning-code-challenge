@@ -11,8 +11,6 @@ import {
   getFromStorage,
 } from '../utils/storage';
 
-import { getMargin } from '../utils/theme';
-
 import { Flex, Box } from '../elements/Grid';
 import TestResults from '../components/TestResults';
 import Button from '../elements/Button';
