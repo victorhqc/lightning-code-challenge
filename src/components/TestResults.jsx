@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -17,44 +17,6 @@ const COLORS = {
   blue: '#118ab2',
 };
 
-const getEngineerLevelColor = ({ ratio }) => {
-  // const ratio =  testsPassed / totalTests;
-
-  // Less than a fifth the tests pass
-  if (ratio < 1 / 5) {
-    return COLORS.red;
-  }
-
-  // one fifth tests pass but less than half
-  if (ratio < 1 / 2) {
-    return COLORS.yellow;
-  }
-
-  // One half tests pass but less than 4 / 5
-  if (ratio < 1) {
-    return COLORS.green;
-  }
-
-  // all tests pass
-  return COLORS.blue;
-};
-
-const getEngineerLevel = ({ ratio }) => {
-  if (ratio < 1 / 5) {
-    return 'junior';
-  }
-
-  if (ratio < 1 / 2) {
-    return 'mid';
-  }
-
-  if (ratio < 1) {
-    return 'mid-high';
-  }
-
-  return 'senior';
-};
-
 const getPassingTests = ({ tests, passedTests }) =>
   `${passedTests} / ${tests.length}`;
 
@@ -69,7 +31,6 @@ const getTestResultColor = ({ isFailed }) => {
 const EngineerLevelContainer = styled.div`
   color: white;
   width: 100%;
-  background-color: ${getEngineerLevelColor};
 `;
 
 const TestResultsContainer = styled.ul`
@@ -84,6 +45,62 @@ const TestResult = styled.li`
   padding: 5px;
   background-color: ${getTestResultColor};
 `;
+
+const RatioAsEmoji = ({ ratio }) => {
+  if (ratio < 1 / 5) {
+    return (
+      <Fragment>
+        <span role="img" aria-label="disappointed">
+          😞
+        </span>
+        <span role="img" aria-label="potato">
+          🥔
+        </span>
+      </Fragment>
+    );
+  }
+
+  if (ratio < 1 / 2) {
+    return (
+      <Fragment>
+        <span role="img" aria-label="neutral">
+          😐
+        </span>
+        <span role="img" aria-label="shrimp">
+          🍤
+        </span>
+      </Fragment>
+    );
+  }
+
+  if (ratio < 1) {
+    return (
+      <Fragment>
+        <span role="img" aria-label="Slightly Smiling Face">
+          🙂
+        </span>
+        <span role="img" aria-label="Taco">
+          🌮
+        </span>
+      </Fragment>
+    );
+  }
+
+  return (
+    <Fragment>
+      <span role="img" aria-label="Smiling Face With Sunglasses">
+        😎
+      </span>
+      <span role="img" aria-label="Pancakes">
+        🥞
+      </span>
+    </Fragment>
+  );
+};
+
+RatioAsEmoji.propTypes = {
+  ratio: PropTypes.number.isRequired,
+};
 
 class TestsResults extends Component {
   constructor(props) {
@@ -123,7 +140,7 @@ class TestsResults extends Component {
     });
   }
 
-  renderEngineerLevel() {
+  renderGrade() {
     const { ratio } = this.state;
 
     return (
@@ -131,7 +148,7 @@ class TestsResults extends Component {
         ratio={ratio}
       >
         <h2>
-          Engineer level: {getEngineerLevel({ ratio })}
+          <RatioAsEmoji ratio={ratio} />
           <br />
           <small>Tests passing: {getPassingTests(this.state)}</small>
         </h2>
@@ -167,7 +184,7 @@ ${restOfTest.isFailed ? error : ''}
   render() {
     return (
       <Container>
-        {this.renderEngineerLevel()}
+        {this.renderGrade()}
         {this.renderTestResults()}
       </Container>
     );
