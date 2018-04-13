@@ -10,23 +10,8 @@ import highlightCode from '../utils/highlightCode';
 
 import Container from '../elements/Container';
 
-const COLORS = {
-  red: '#ef476f',
-  yellow: '#ffd166',
-  green: '#06d6a0',
-  blue: '#118ab2',
-};
-
 const getPassingTests = ({ tests, passedTests }) =>
   `${passedTests} / ${tests.length}`;
-
-const getTestResultColor = ({ isFailed }) => {
-  if (isFailed) {
-    return COLORS.red;
-  }
-
-  return COLORS.green;
-};
 
 const EngineerLevelContainer = styled.div`
   color: white;
@@ -43,7 +28,6 @@ const TestResultsContainer = styled.ul`
 const TestResult = styled.li`
   color: white;
   padding: 5px;
-  background-color: ${getTestResultColor};
 `;
 
 const RatioAsEmoji = ({ ratio }) => {
@@ -164,16 +148,14 @@ class TestsResults extends Component {
         {tests.map(({
           name,
           error,
-          ...restOfTest
+          isFailed,
         }) => (
           <TestResult
             key={name}
-            {...restOfTest}
           >
             <ReactMarkdown
-              source={`### ${name}
-${restOfTest.isFailed ? error : ''}
-`}
+              source={`### ${isFailed ? '⚠️' : '👌'} ${name}
+${isFailed ? error : ''}`}
             />
           </TestResult>
         ))}

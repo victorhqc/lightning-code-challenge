@@ -104,7 +104,7 @@ class TestPage extends Component {
 
     return (
       <StyledFlex>
-        <Box width={2 / 3} marginx="xsmall">
+        <Box width={2 / 3}>
           <AceEditor
             style={style.editor}
             onChange={this.doChange}
@@ -116,7 +116,7 @@ class TestPage extends Component {
             theme="monokai"
           />
         </Box>
-        <StyledBox width={1 / 3} marginx="xsmall">
+        <StyledBox width={1 / 3} >
           <TestResults code={code} testCases={activeTest.testCases} />
         </StyledBox>
       </StyledFlex>
