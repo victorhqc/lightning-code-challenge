@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import {
   Route,
@@ -8,6 +8,7 @@ import reduce from 'lodash/reduce';
 
 import 'highlight.js/styles/monokai.css';
 
+import TopHeader from './TopHeader';
 import SideBar from './SideBar';
 
 import { Flex, Box } from '../elements/Grid';
@@ -59,21 +60,24 @@ const RouteWithSubRoutes = route => (
 );
 
 const App = () => (
-  <Main>
-    <Flex>
-      <Box width={1 / 6}>
-        <SideBar />
-      </Box>
-      <Box width={5 / 6}>
-        <Switch>
-          <Route exact path="/" component={AboutPage} />
-          {addRoutes().map(route => (
-            <RouteWithSubRoutes key={route.path} {...route} />
-          ))}
-        </Switch>
-      </Box>
-    </Flex>
-  </Main>
+  <Fragment>
+    <TopHeader />
+    <Main>
+      <Flex>
+        <Box width={1 / 6}>
+          <SideBar />
+        </Box>
+        <Box width={5 / 6}>
+          <Switch>
+            <Route exact path="/" component={AboutPage} />
+            {addRoutes().map(route => (
+              <RouteWithSubRoutes key={route.path} {...route} />
+            ))}
+          </Switch>
+        </Box>
+      </Flex>
+    </Main>
+  </Fragment>
 );
 
 export default App;

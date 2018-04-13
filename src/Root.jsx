@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { ConnectedRouter as Router } from 'react-router-redux';
 import { ThemeProvider, injectGlobal } from 'styled-components';
@@ -6,7 +6,6 @@ import createHistory from 'history/createBrowserHistory';
 
 import 'highlight.js/styles/monokai.css';
 
-import TopHeader from './components/TopHeader';
 import App from './components/App';
 
 import configureStore from './store';
@@ -29,10 +28,7 @@ const Root = () => (
   <Provider store={store}>
     <Router history={history}>
       <ThemeProvider theme={{ mode: 'dark', size: 'normal' }}>
-        <Fragment>
-          <TopHeader />
-          <App />
-        </Fragment>
+        <App />
       </ThemeProvider>
     </Router>
   </Provider>
