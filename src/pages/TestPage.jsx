@@ -74,8 +74,8 @@ class TestPage extends Component {
     } = this.props;
 
     return (
-      <Flex marginX="-xsmall">
-        <Box width={2 / 3} px={getMargin} marginX="xsmall">
+      <Flex marginx="-xsmall">
+        <Box width={2 / 3} marginx="xsmall">
           <AceEditor
             style={style.editor}
             onChange={this.doChange}
@@ -91,7 +91,7 @@ class TestPage extends Component {
             🗑 Clear code
           </Button>
         </Box>
-        <Box width={1 / 3} px={getMargin} marginX="xsmall">
+        <Box width={1 / 3} marginx="xsmall">
           <TestResults code={code} testCases={testCases} />
         </Box>
       </Flex>
