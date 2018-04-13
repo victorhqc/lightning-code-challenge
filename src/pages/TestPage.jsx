@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -16,22 +16,19 @@ import {
   getFromStorage,
 } from '../utils/storage';
 
-import { Flex, Box } from '../elements/Grid';
 import TestResults from '../components/TestResults';
 
-const StyledFlex = Flex.extend`
-  height: 100%;
-`;
+import Container from '../elements/Container';
 
-const StyledBox = Box.extend`
-  height: 100%;
+const StyledContainer = Container.extend`
+  height: 50vh;
   overflow: auto;
 `;
 
 const style = {
   editor: {
     width: '100%',
-    height: '100%',
+    height: '50vh',
   },
 };
 
@@ -103,23 +100,21 @@ class TestPage extends Component {
     }
 
     return (
-      <StyledFlex>
-        <Box width={2 / 3}>
-          <AceEditor
-            style={style.editor}
-            onChange={this.doChange}
-            value={code}
-            setOptions={{
-              spellcheck: false,
-            }}
-            mode="javascript"
-            theme="monokai"
-          />
-        </Box>
-        <StyledBox width={1 / 3} >
+      <Fragment>
+        <AceEditor
+          style={style.editor}
+          onChange={this.doChange}
+          value={code}
+          setOptions={{
+            spellcheck: false,
+          }}
+          mode="javascript"
+          theme="monokai"
+        />
+        <StyledContainer>
           <TestResults code={code} testCases={activeTest.testCases} />
-        </StyledBox>
-      </StyledFlex>
+        </StyledContainer>
+      </Fragment>
     );
   }
 }
