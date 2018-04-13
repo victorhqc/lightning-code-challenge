@@ -1,11 +1,12 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 
-import highlightCode from '../utils/highlightCode';
+import codeResults, { updatedAtProps } from '../store/codeResults';
 
-import Button from '../elements/Button';
+import highlightCode from '../utils/highlightCode';
 
 const COLORS = {
   red: '#ef476f',
@@ -96,6 +97,16 @@ class TestsResults extends Component {
     this.doRefreshResults = this.doRefreshResults.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const {
+      updatedAt,
+    } = this.props;
+
+    if (updatedAt !== nextProps.updatedAt) {
+      this.doRefreshResults();
+    }
+  }
+
   componentDidUpdate() {
     highlightCode();
   }
@@ -156,7 +167,6 @@ ${restOfTest.isFailed ? error : ''}
     return (
       <Fragment>
         {this.renderEngineerLevel()}
-        <Button onClick={this.doRefreshResults}>Refresh results</Button>
         {this.renderTestResults()}
       </Fragment>
     );
@@ -166,6 +176,14 @@ ${restOfTest.isFailed ? error : ''}
 TestsResults.propTypes = {
   code: PropTypes.string.isRequired,
   testCases: PropTypes.func.isRequired,
+
+  ...updatedAtProps,
 };
 
-export default TestsResults;
+const mapStateToprops = state => ({
+  updatedAt: codeResults.selectors.getUpdatedAt(state),
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToprops, mapDispatchToProps)(TestsResults);

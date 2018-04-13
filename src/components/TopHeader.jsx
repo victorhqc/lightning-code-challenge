@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 import {
@@ -19,6 +21,8 @@ import {
   isPathnameInInstructions,
   withRouterProps,
 } from '../utils/router';
+
+import codeResults from '../store/codeResults';
 
 import Link from '../elements/Link';
 
@@ -95,7 +99,7 @@ const Navigation = (props) => {
 
   return (
     <Nav margin="large">
-      <Button>
+      <Button onClick={props.setCodeUpdatedAt}>
         <span role="img" aria-label="">
           🔥
         </span>
@@ -123,4 +127,11 @@ const TopHeader = props => (
   </Header>
 );
 
-export default withRouter(TopHeader);
+const mapDispatchToProps = {
+  setCodeUpdatedAt: () => codeResults.actions.setUpdatedAt(Date.now()),
+};
+
+export default compose(
+  withRouter,
+  connect(null, mapDispatchToProps),
+)(TopHeader);
