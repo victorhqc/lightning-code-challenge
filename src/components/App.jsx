@@ -1,4 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import {
   Route,
@@ -8,6 +10,8 @@ import reduce from 'lodash/reduce';
 
 import 'highlight.js/styles/monokai.css';
 
+import storeTests from '../store/tests';
+
 import TopHeader from './TopHeader';
 import SideBar from './SideBar';
 
@@ -16,8 +20,6 @@ import { Flex, Box } from '../elements/Grid';
 import InstructionsPage from '../pages/InstructionsPage';
 import TestPage from '../pages/TestPage';
 import AboutPage from '../pages/AboutPage';
-
-import { TESTS } from '../constants/tests';
 
 import {
   getBackgroundColor,
@@ -37,17 +39,15 @@ const mapTest = (WrappedComponent, route) => props => (
   <WrappedComponent {...props} {...route.test} />
 );
 
-const addRoutes = () => reduce(TESTS, (prev, test) => ([
+const addRoutes = tests => reduce(tests, (prev, test) => ([
   ...prev,
   {
     component: TestPage,
     path: test.path,
-    test,
   },
   {
     path: `/intro${test.path}`,
     component: InstructionsPage,
-    test,
   },
 ]), []);
 
@@ -59,25 +59,59 @@ const RouteWithSubRoutes = route => (
   />
 );
 
-const App = () => (
-  <Fragment>
-    <TopHeader />
-    <Main>
-      <Flex>
-        <Box width={1 / 6}>
-          <SideBar />
-        </Box>
-        <Box width={5 / 6}>
-          <Switch>
-            <Route exact path="/" component={AboutPage} />
-            {addRoutes().map(route => (
-              <RouteWithSubRoutes key={route.path} {...route} />
-            ))}
-          </Switch>
-        </Box>
-      </Flex>
-    </Main>
-  </Fragment>
-);
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-export default App;
+    const {
+      setDefaultTests,
+    } = this.props;
+
+    setDefaultTests();
+  }
+
+  render() {
+    const {
+      tests,
+    } = this.props;
+
+    return (
+      <Fragment>
+        <TopHeader />
+        <Main>
+          <Flex>
+            <Box width={1 / 6}>
+              <SideBar />
+            </Box>
+            <Box width={5 / 6}>
+              <Switch>
+                <Route exact path="/" component={AboutPage} />
+                {addRoutes(tests).map(route => (
+                  <RouteWithSubRoutes key={route.path} {...route} />
+                ))}
+              </Switch>
+            </Box>
+          </Flex>
+        </Main>
+      </Fragment>
+    );
+  }
+}
+
+App.propTypes = {
+  setDefaultTests: PropTypes.func.isRequired,
+  tests: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    path: PropTypes.string,
+  })).isRequired,
+};
+
+const mapStateToProps = state => ({
+  tests: storeTests.selectors.getTests(state),
+});
+
+const mapDispatchToProps = {
+  setDefaultTests: storeTests.actions.setDefaultTests,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
