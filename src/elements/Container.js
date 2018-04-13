@@ -17,7 +17,6 @@ import {
 const Container = styled.div`
   color: ${getColor};
   padding: ${getPadding}px;
-  height: 100%;
 
   margin: ${getMargin}px;
   margin-top: ${getMarginY}px;
