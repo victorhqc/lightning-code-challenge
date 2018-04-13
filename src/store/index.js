@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from './reducers';
 
 const loggerMiddleware = createLogger({
@@ -12,10 +13,12 @@ const middleware = history => [
   routerMiddleware(history),
 ];
 
+const enhancer = composeWithDevTools({});
+
 const configureStore = (state = {}, history) => createStore(
   reducers,
   state,
-  applyMiddleware(...middleware(history)),
+  enhancer(applyMiddleware(...middleware(history))),
 );
 
 export default configureStore;
