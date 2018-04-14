@@ -79,8 +79,13 @@ SubElement.defaultProps = {
   padding: 'small',
 };
 
-const isTestActive = ({ test, testByPathName }) =>
-  test.name === testByPathName.name;
+const isTestActive = ({ test, testByPathName }) => {
+  if (!testByPathName) {
+    return false;
+  }
+
+  return test.name === testByPathName.name;
+};
 
 const NavigationData = ({ test, testByPathName, locationIn }) => {
   if (
