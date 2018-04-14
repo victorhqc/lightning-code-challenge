@@ -12,16 +12,7 @@ import codeResults, {
 
 import highlightCode from '../utils/highlightCode';
 
-import RatioAsEmojis from './RatioAsEmojis';
 import Container from '../atoms/Container';
-
-const getPassingTests = ({ tests, passedTests }) =>
-  `${passedTests} / ${tests.length}`;
-
-const EngineerLevelContainer = styled.div`
-  color: white;
-  width: 100%;
-`;
 
 const TestResultsContainer = styled.ul`
   margin: 0;
@@ -67,22 +58,6 @@ class TestsResults extends Component {
     setData(results);
   }
 
-  renderGrade() {
-    const { resultsData } = this.props;
-
-    return (
-      <EngineerLevelContainer
-        ratio={resultsData.ratio}
-      >
-        <h2>
-          <RatioAsEmojis ratio={resultsData.ratio} />
-          <br />
-          <small>Tests passing: {getPassingTests(resultsData)}</small>
-        </h2>
-      </EngineerLevelContainer>
-    );
-  }
-
   renderTestResults() {
     const { resultsData } = this.props;
 
@@ -109,7 +84,6 @@ ${isFailed ? error : ''}`}
   render() {
     return (
       <Container>
-        {this.renderGrade()}
         {this.renderTestResults()}
       </Container>
     );
