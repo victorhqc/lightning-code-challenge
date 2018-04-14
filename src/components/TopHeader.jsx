@@ -37,6 +37,7 @@ const Header = styled.header`
   height: ${HEADER_HEIGHT}px;
   background-color: ${getComplementBackgroundColor};
   display: flex;
+  z-index: 10
 `;
 
 const Brand = styled.div`
