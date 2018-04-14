@@ -25,7 +25,7 @@ import {
 
 import codeResults from '../store/codeResults';
 
-import Link from '../elements/Link';
+import Link from '../atoms/Link';
 
 import { HEADER_HEIGHT } from '../constants/theme';
 

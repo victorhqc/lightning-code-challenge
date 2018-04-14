@@ -13,7 +13,7 @@ import codeResults, {
 import highlightCode from '../utils/highlightCode';
 
 import RatioAsEmojis from './RatioAsEmojis';
-import Container from '../elements/Container';
+import Container from '../atoms/Container';
 
 const getPassingTests = ({ tests, passedTests }) =>
   `${passedTests} / ${tests.length}`;

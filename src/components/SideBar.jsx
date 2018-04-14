@@ -20,8 +20,8 @@ import {
   withRouterProps,
 } from '../utils/router';
 
-import Container from '../elements/Container';
-import Link from '../elements/Link';
+import Container from '../atoms/Container';
+import Link from '../atoms/Link';
 
 const Nav = styled.nav`
 

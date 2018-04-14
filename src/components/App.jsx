@@ -17,7 +17,7 @@ import storeTests, { testsPropTypes } from '../store/tests';
 import TopHeader from './TopHeader';
 import SideBar from './SideBar';
 
-import { Flex, Box } from '../elements/Grid';
+import { Flex, Box } from '../atoms/Grid';
 
 import InstructionsPage from '../pages/InstructionsPage';
 import TestPage from '../pages/TestPage';

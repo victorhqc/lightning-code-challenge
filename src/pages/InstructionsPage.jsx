@@ -4,8 +4,8 @@ import ReactMarkdown from 'react-markdown';
 
 import storeActiveTest, { activeTestProps } from '../store/activeTest';
 
-import Container from '../elements/Container';
-import Link from '../elements/Link';
+import Container from '../atoms/Container';
+import Link from '../atoms/Link';
 
 import highlightCode from '../utils/highlightCode';
 

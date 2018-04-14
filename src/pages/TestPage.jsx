@@ -18,7 +18,7 @@ import {
 
 import TestResults from '../components/TestResults';
 
-import Container from '../elements/Container';
+import Container from '../atoms/Container';
 
 const StyledContainer = Container.extend`
   height: 50vh;

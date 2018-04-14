@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
-import Container from '../elements/Container';
+import Container from '../atoms/Container';
 
 const INTRO = `
 # Lightning Code Challenge
