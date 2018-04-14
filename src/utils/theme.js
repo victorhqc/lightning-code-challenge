@@ -32,6 +32,16 @@ export const getAccentColor = theme('mode', {
   light: '#06d6a0',
 });
 
+export const getActiveBorder = theme.variants('mode', 'active', {
+  default: { light: 'transparent', dark: 'transparent' },
+  active: { light: '#06d6a0', dark: '#118ab2' },
+});
+
+export const getActiveBackgroundColor = theme.variants('mode', 'active', {
+  default: { light: '#fff', dark: '#20262e' },
+  active: { light: '#fefefe', dark: '#1c2128' },
+});
+
 const getSpacingFactory = propName => theme.variants('size', propName, {
   default: { normal: SPACING.normal.md, compact: SPACING.compact.md },
   xsmall: { normal: SPACING.normal.xs, compact: SPACING.compact.xs },

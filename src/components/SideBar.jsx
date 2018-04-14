@@ -15,7 +15,7 @@ import codeResults, { resultsProps } from '../store/codeResults';
 import {
   getColor,
   getHeaderHeight,
-  getPadding,
+  getMargin,
 } from '../utils/theme';
 import {
   getTestPathFromLocation,
@@ -24,7 +24,6 @@ import {
 } from '../utils/router';
 
 import Container from '../atoms/Container';
-import Link from '../atoms/Link';
 import List from '../atoms/List';
 
 import RatioAsEmojis from './RatioAsEmojis';
@@ -39,7 +38,7 @@ const Nav = styled.nav`
 
 const StyledContainer = Container.extend`
   border-right: 1px solid ${getColor}10;
-  height: calc(100vh - ${getHeaderHeight}px - (${getPadding}px * 2));
+  height: calc(100vh - ${getHeaderHeight}px);
 
   h4 {
     margin-top: 0;
@@ -71,78 +70,83 @@ Results.propTypes = {
   ...resultsProps,
 };
 
-const NavigationTitle = ({ children }) => (
+const SubElement = List.Element.extend`
+  margin-left: ${getMargin}px;
+`;
+
+SubElement.defaultProps = {
+  margin: 'small',
+  padding: 'small',
+};
+
+const isTestActive = ({ test, testByPathName }) =>
+  test.name === testByPathName.name;
+
+const NavigationData = ({ test, testByPathName, locationIn }) => {
+  if (
+    locationIn === 'home'
+    || !(isTestActive({ test, testByPathName }))
+  ) {
+    return null;
+  }
+
+  return (
+    <Fragment>
+      <SubElement active={locationIn === 'instructions' ? 'active' : 'default'}>
+        <List.Link
+          margin="small"
+          to={`/intro${testByPathName.path}`}
+          href={`/intro${testByPathName.path}`}
+        >
+          Instructions
+        </List.Link>
+      </SubElement>
+      <SubElement active={locationIn === 'test' ? 'active' : 'default'}>
+        <List.Link
+          margin="small"
+          to={testByPathName.path}
+          href={testByPathName.path}
+        >
+          Test
+        </List.Link>
+      </SubElement>
+    </Fragment>
+  );
+};
+
+NavigationData.propTypes = {
+  ...localPropTypes,
+  ...testPropTypes,
+};
+
+const Navigation = ({ tests, ...restOfProps }) => (
   <Container padding="default">
     <h4>Navigation</h4>
-    {children}
+    <Nav>
+      <List>
+        {map(tests, test => (
+          <Fragment key={test.path}>
+            <List.Element
+              active={isTestActive({ test, ...restOfProps }) ? 'active' : 'default'}
+            >
+              <List.Link href={`/intro${test.path}`} to={`/intro${test.path}`}>
+                {test.name}
+              </List.Link>
+            </List.Element>
+            <NavigationData
+              test={test}
+              {...restOfProps}
+            />
+          </Fragment>
+        ))}
+      </List>
+    </Nav>
   </Container>
 );
 
-NavigationTitle.defaultProps = {
-  children: null,
-};
-
-NavigationTitle.propTypes = {
-  children: PropTypes.element,
-};
-
-const Navigation = (props) => {
-  const {
-    locationIn,
-    testByPathName,
-    tests,
-  } = props;
-
-  switch (locationIn) {
-    case 'home':
-      return (
-        <NavigationTitle>
-          <Nav>
-            <List>
-              {map(tests, test => (
-                <li key={test.path}>
-                  <Link href={`/intro${test.path}`} to={`/intro${test.path}`}>
-                    {test.name}
-                  </Link>
-                </li>
-              ))}
-            </List>
-          </Nav>
-        </NavigationTitle>
-      );
-    case 'instructions':
-      return (
-        <NavigationTitle>
-          <Link
-            margin="small"
-            to={testByPathName.path}
-            href={testByPathName.path}
-          >
-            Test
-          </Link>
-        </NavigationTitle>
-      );
-    case 'test':
-      return (
-        <NavigationTitle>
-          <Link
-            margin="small"
-            to={`/intro${testByPathName.path}`}
-            href={`/intro${testByPathName.path}`}
-          >
-            Instructions
-          </Link>
-        </NavigationTitle>
-      );
-    default:
-      return null;
-  }
-};
-
 Navigation.propTypes = {
-  ...localPropTypes,
-  ...testPropTypes,
   ...testsPropTypes,
+  ...testPropTypes,
 };
 
 class SideBar extends Component {
