@@ -37,6 +37,7 @@ const RatioAsEmoji = ({ ratio }) => {
         <span role="img" aria-label="disappointed">
           😞
         </span>
+        {' '}
         <span role="img" aria-label="potato">
           🥔
         </span>
@@ -50,6 +51,7 @@ const RatioAsEmoji = ({ ratio }) => {
         <span role="img" aria-label="neutral">
           😐
         </span>
+        {' '}
         <span role="img" aria-label="shrimp">
           🍤
         </span>
@@ -63,6 +65,7 @@ const RatioAsEmoji = ({ ratio }) => {
         <span role="img" aria-label="Slightly Smiling Face">
           🙂
         </span>
+        {' '}
         <span role="img" aria-label="Taco">
           🌮
         </span>
@@ -75,6 +78,7 @@ const RatioAsEmoji = ({ ratio }) => {
       <span role="img" aria-label="Smiling Face With Sunglasses">
         😎
       </span>
+      {' '}
       <span role="img" aria-label="Pancakes">
         🥞
       </span>
