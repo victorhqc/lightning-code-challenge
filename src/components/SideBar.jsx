@@ -126,7 +126,7 @@ NavigationData.propTypes = {
 
 const Navigation = ({ tests, ...restOfProps }) => (
   <Container padding="default">
-    <h4>Navigation</h4>
+    <h4>Tests available</h4>
     <Nav>
       <List>
         {map(tests, test => (
