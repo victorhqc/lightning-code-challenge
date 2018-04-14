@@ -111,7 +111,7 @@ ${isFailed ? error : ''}`}
       <Fragment>
         <Sticky height="40px">
           <Container padding="small">
-            <H3>Tests results</H3>
+            <H3>Test results</H3>
           </Container>
         </Sticky>
         <TestsContainer padding="small" height={40}>
