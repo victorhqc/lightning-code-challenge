@@ -15,13 +15,14 @@ import {
   saveToStorage,
   getFromStorage,
 } from '../utils/storage';
+import { getHeaderHeight } from '../utils/theme';
 
 import TestResults from '../components/TestResults';
 
 import Container from '../atoms/Container';
 
 const StyledContainer = Container.extend`
-  height: 50vh;
+  height: calc(50vh - ${getHeaderHeight()}px);
   overflow: auto;
 `;
 
