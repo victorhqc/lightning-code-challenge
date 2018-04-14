@@ -15,20 +15,32 @@ const List = styled.ul`
   list-style: none;
 `;
 
+const clickableStyle = (props) => {
+  if (!props.clickable) {
+    return null;
+  }
+
+  return `
+    cursor: pointer;
+    border-left: 2px solid ${getActiveBorder};
+
+    &:hover {
+      background-color: ${getComplementBackgroundColor(props)};
+    }
+  `;
+};
+
 const Element = styled.li`
   padding: ${getPadding}px;
-  cursor: pointer;
   background-color: ${getActiveBackgroundColor};
-  border-left: 2px solid ${getActiveBorder};
 
-  &:hover {
-    background-color: ${getComplementBackgroundColor};
-  }
+  ${clickableStyle}
 `;
 
 Element.defaultProps = {
   padding: 'small',
   active: 'default',
+  clickable: true,
 };
 
 List.Element = Element;

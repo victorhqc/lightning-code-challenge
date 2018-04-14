@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 
 import isEmpty from 'lodash/isEmpty';
@@ -11,28 +10,24 @@ import codeResults, {
   resultsProps,
 } from '../store/codeResults';
 
-import { getMargin } from '../utils/theme';
+import { getMargin, getPadding } from '../utils/theme';
 
 import highlightCode from '../utils/highlightCode';
 
 import Container from '../atoms/Container';
-import { H1 } from '../atoms/Headings';
-
-const TestResultsContainer = styled.ul`
-  margin: 0;
-  list-style: none;
-  padding: 0;
-  overflow: auto;
-`;
-
-const TestResult = styled.li`
-  color: white;
-  padding: 5px;
-`;
+import { H1, H3 } from '../atoms/Headings';
+import List from '../atoms/List';
+import Sticky from '../atoms/Sticky';
 
 const NoTestsTitle = H1.extend`
   text-align: center;
   margin-top: ${getMargin}px;
+`;
+
+const TestsContainer = Container.extend`
+  overflow: auto;
+  height: calc(100% - ${props => props.height + getPadding(props)}px);
+  padding-top: ${props => props.height}px;
 `;
 
 const EmptyResults = () => (
@@ -83,22 +78,23 @@ class TestsResults extends Component {
     const { resultsData } = this.props;
 
     return (
-      <TestResultsContainer>
+      <List>
         {resultsData.tests.map(({
           name,
           error,
           isFailed,
         }) => (
-          <TestResult
+          <List.Element
+            clickable={false}
             key={name}
           >
             <ReactMarkdown
               source={`### ${isFailed ? '⚠️' : '👌'} ${name}
 ${isFailed ? error : ''}`}
             />
-          </TestResult>
+          </List.Element>
         ))}
-      </TestResultsContainer>
+      </List>
     );
   }
 
@@ -112,9 +108,16 @@ ${isFailed ? error : ''}`}
     }
 
     return (
-      <Container padding="default">
-        {this.renderTestResults()}
-      </Container>
+      <Fragment>
+        <Sticky height="40px">
+          <Container padding="small">
+            <H3>Tests results</H3>
+          </Container>
+        </Sticky>
+        <TestsContainer padding="small" height={40}>
+          {this.renderTestResults()}
+        </TestsContainer>
+      </Fragment>
     );
   }
 }
