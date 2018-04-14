@@ -20,29 +20,34 @@ ${JSON.stringify(value, null, ' ')}
   }
 };
 
-const expectedValueToBeExpected = (value, expected) =>
-  `expected ${parseValue(value)} to be ${parseValue(expected)}`;
+const expectedValueToBeExpected = (value, expected, customError) => {
+  if (customError) {
+    return customError;
+  }
+
+  return `expected ${parseValue(value)} to be ${parseValue(expected)}`;
+};
 
 export const expect = value => ({
-  toBe: (expected) => {
+  toBe: (expected, customError) => {
     if (value !== expected) {
-      throw new Error(expectedValueToBeExpected(value, expected));
+      throw new Error(expectedValueToBeExpected(value, expected, customError));
     }
 
     return true;
   },
 
-  toBeTruthy: () => {
+  toBeTruthy: (customError) => {
     if (!value) {
-      throw new Error(expectedValueToBeExpected(value, 'truthy'));
+      throw new Error(expectedValueToBeExpected(value, 'truthy', customError));
     }
 
     return true;
   },
 
-  toEqual: (expected) => {
+  toEqual: (expected, customError) => {
     if (!isEqual(value, expected)) {
-      throw new Error(expectedValueToBeExpected(value, expected));
+      throw new Error(expectedValueToBeExpected(value, expected, customError));
     }
 
     return true;

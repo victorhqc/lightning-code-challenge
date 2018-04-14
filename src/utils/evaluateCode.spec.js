@@ -15,6 +15,12 @@ describe('expect', () => {
         evaluateExpect('foo').toBe('bar');
       }).toThrow('expected **foo** to be **bar**');
     });
+
+    it('Should throw custom messages', () => {
+      expect(() => {
+        evaluateExpect('foo').toBe('bar', 'Oh no!');
+      }).toThrow('Oh no!');
+    });
   });
 
   describe('.toBeTruthy', () => {
@@ -26,6 +32,12 @@ describe('expect', () => {
       expect(() => {
         evaluateExpect(false).toBeTruthy();
       }).toThrow('expected **false** to be **truthy**');
+    });
+
+    it('Should throw custom messages', () => {
+      expect(() => {
+        evaluateExpect(false).toBeTruthy('Oh no!');
+      }).toThrow('Oh no!');
     });
   });
 
@@ -70,6 +82,26 @@ ${' '}to be${' '}
 ${JSON.stringify(expected, null, ' ')}
 \`\`\`
 `);
+    });
+
+    it('Should throw custom messages', () => {
+      const value = {
+        foo: {
+          bar: false,
+        },
+        hello: 'world',
+      };
+
+      const expected = {
+        foo: {
+          bar: true,
+        },
+        hello: 'world',
+      };
+
+      expect(() => {
+        evaluateExpect(value).toEqual(expected, 'Oh no!');
+      }).toThrow('Oh no!');
     });
   });
 });
