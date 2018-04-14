@@ -1,13 +1,18 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 
-import codeResults, { updatedAtProps } from '../store/codeResults';
+import codeResults, {
+  updatedAtProps,
+  resultsProps,
+} from '../store/codeResults';
+
 
 import highlightCode from '../utils/highlightCode';
 
+import RatioAsEmojis from './RatioAsEmojis';
 import Container from '../elements/Container';
 
 const getPassingTests = ({ tests, passedTests }) =>
@@ -30,75 +35,9 @@ const TestResult = styled.li`
   padding: 5px;
 `;
 
-const RatioAsEmoji = ({ ratio }) => {
-  if (ratio < 1 / 5) {
-    return (
-      <Fragment>
-        <span role="img" aria-label="disappointed">
-          😞
-        </span>
-        {' '}
-        <span role="img" aria-label="potato">
-          🥔
-        </span>
-      </Fragment>
-    );
-  }
-
-  if (ratio < 1 / 2) {
-    return (
-      <Fragment>
-        <span role="img" aria-label="neutral">
-          😐
-        </span>
-        {' '}
-        <span role="img" aria-label="shrimp">
-          🍤
-        </span>
-      </Fragment>
-    );
-  }
-
-  if (ratio < 1) {
-    return (
-      <Fragment>
-        <span role="img" aria-label="Slightly Smiling Face">
-          🙂
-        </span>
-        {' '}
-        <span role="img" aria-label="Taco">
-          🌮
-        </span>
-      </Fragment>
-    );
-  }
-
-  return (
-    <Fragment>
-      <span role="img" aria-label="Smiling Face With Sunglasses">
-        😎
-      </span>
-      {' '}
-      <span role="img" aria-label="Pancakes">
-        🥞
-      </span>
-    </Fragment>
-  );
-};
-
-RatioAsEmoji.propTypes = {
-  ratio: PropTypes.number.isRequired,
-};
-
 class TestsResults extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      ratio: 0,
-      passedTests: 0,
-      tests: [],
-    };
 
     this.doRefreshResults = this.doRefreshResults.bind(this);
   }
@@ -121,35 +60,35 @@ class TestsResults extends Component {
     const {
       code,
       testCases,
+      setData,
     } = this.props;
 
-    this.setState({
-      ...testCases(code),
-    });
+    const results = testCases(code);
+    setData(results);
   }
 
   renderGrade() {
-    const { ratio } = this.state;
+    const { resultsData } = this.props;
 
     return (
       <EngineerLevelContainer
-        ratio={ratio}
+        ratio={resultsData.ratio}
       >
         <h2>
-          <RatioAsEmoji ratio={ratio} />
+          <RatioAsEmojis ratio={resultsData.ratio} />
           <br />
-          <small>Tests passing: {getPassingTests(this.state)}</small>
+          <small>Tests passing: {getPassingTests(resultsData)}</small>
         </h2>
       </EngineerLevelContainer>
     );
   }
 
   renderTestResults() {
-    const { tests } = this.state;
+    const { resultsData } = this.props;
 
     return (
       <TestResultsContainer>
-        {tests.map(({
+        {resultsData.tests.map(({
           name,
           error,
           isFailed,
@@ -181,13 +120,17 @@ TestsResults.propTypes = {
   code: PropTypes.string.isRequired,
   testCases: PropTypes.func.isRequired,
 
+  ...resultsProps,
   ...updatedAtProps,
 };
 
 const mapStateToprops = state => ({
   updatedAt: codeResults.selectors.getUpdatedAt(state),
+  resultsData: codeResults.selectors.getData(state),
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  setData: codeResults.actions.setData,
+};
 
 export default connect(mapStateToprops, mapDispatchToProps)(TestsResults);
