@@ -14,6 +14,18 @@ import {
   marginXProps,
 } from '../utils/theme';
 
+const verticalAlign = (props) => {
+  if (!props.verticalAlign) {
+    return null;
+  }
+
+  return `
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  `;
+};
+
 const Container = styled.div`
   color: ${getColor};
   padding: ${getPadding}px;
@@ -23,6 +35,8 @@ const Container = styled.div`
   margin-bottom: ${getMarginY}px;
   margin-left: ${getMarginX}px;
   margin-right: ${getMarginX}px;
+
+  ${verticalAlign}
 `;
 
 Container.propTypes = {

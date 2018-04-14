@@ -23,7 +23,6 @@ import Container from '../atoms/Container';
 
 const StyledContainer = Container.extend`
   height: calc(50vh - ${getHeaderHeight()}px);
-  overflow: auto;
 `;
 
 const style = {

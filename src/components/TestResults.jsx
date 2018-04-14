@@ -4,15 +4,19 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 
+import isEmpty from 'lodash/isEmpty';
+
 import codeResults, {
   updatedAtProps,
   resultsProps,
 } from '../store/codeResults';
 
+import { getMargin } from '../utils/theme';
 
 import highlightCode from '../utils/highlightCode';
 
 import Container from '../atoms/Container';
+import { H1 } from '../atoms/Headings';
 
 const TestResultsContainer = styled.ul`
   margin: 0;
@@ -25,6 +29,23 @@ const TestResult = styled.li`
   color: white;
   padding: 5px;
 `;
+
+const NoTestsTitle = H1.extend`
+  text-align: center;
+  margin-top: ${getMargin}px;
+`;
+
+const EmptyResults = () => (
+  <Container verticalAlign style={{ height: '100%' }}>
+    <NoTestsTitle margin="xlarge">
+      Run{' '}
+      <span role="img" aria-label="">
+        🔥
+      </span>
+      {' '}your code to see the results
+    </NoTestsTitle>
+  </Container>
+);
 
 class TestsResults extends Component {
   constructor(props) {
@@ -82,8 +103,16 @@ ${isFailed ? error : ''}`}
   }
 
   render() {
+    const { resultsData } = this.props;
+
+    if (isEmpty(resultsData.tests)) {
+      return (
+        <EmptyResults />
+      );
+    }
+
     return (
-      <Container>
+      <Container padding="default">
         {this.renderTestResults()}
       </Container>
     );
