@@ -1,10 +1,15 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const EmojisWrapper = styled.h1`
+  margin: 0;
+`;
 
 const RatioAsEmojis = ({ ratio }) => {
   if (ratio < 1 / 5) {
     return (
-      <Fragment>
+      <EmojisWrapper>
         <span role="img" aria-label="disappointed">
           😞
         </span>
@@ -12,13 +17,13 @@ const RatioAsEmojis = ({ ratio }) => {
         <span role="img" aria-label="potato">
           🥔
         </span>
-      </Fragment>
+      </EmojisWrapper>
     );
   }
 
   if (ratio < 1 / 2) {
     return (
-      <Fragment>
+      <EmojisWrapper>
         <span role="img" aria-label="neutral">
           😐
         </span>
@@ -26,13 +31,13 @@ const RatioAsEmojis = ({ ratio }) => {
         <span role="img" aria-label="shrimp">
           🍤
         </span>
-      </Fragment>
+      </EmojisWrapper>
     );
   }
 
   if (ratio < 1) {
     return (
-      <Fragment>
+      <EmojisWrapper>
         <span role="img" aria-label="Slightly Smiling Face">
           🙂
         </span>
@@ -40,12 +45,12 @@ const RatioAsEmojis = ({ ratio }) => {
         <span role="img" aria-label="Taco">
           🌮
         </span>
-      </Fragment>
+      </EmojisWrapper>
     );
   }
 
   return (
-    <Fragment>
+    <EmojisWrapper>
       <span role="img" aria-label="Smiling Face With Sunglasses">
         😎
       </span>
@@ -53,7 +58,7 @@ const RatioAsEmojis = ({ ratio }) => {
       <span role="img" aria-label="Pancakes">
         🥞
       </span>
-    </Fragment>
+    </EmojisWrapper>
   );
 };
 
