@@ -45,56 +45,81 @@ export const testCases = code => describe('Foo test', () => {
 
   return [
     it('Collection exists', () => {
-      const collection = new Collection();
-      expect(typeof collection).toBe('object');
+      try {
+        const collection = new Collection();
+        expect(typeof collection).toBe('object');
+      } catch (e) {
+        throw new Error('**Collection** doesn\'t exist, make sure you\'re returning from the `test()` function');
+      }
     }),
 
-    it('Should come from a Collection instance', () => {
-      const collection = new Collection();
-      expect(collection.constructor.name).toBe('Collection');
+    it('collection is a Collection', () => {
+      try {
+        const collection = new Collection();
+        expect(collection.constructor.name)
+          .toBe('Collection');
+      } catch (e) {
+        throw new Error('Looks like **Collection** constructor name is not `Collection`');
+      }
     }),
 
-    it('Should not share instances', () => {
-      const collection = new Collection();
-      const otherCollection = new Collection();
-      expect(collection !== otherCollection).toBeTruthy();
+    it('Different `Collection` are different instances', () => {
+      try {
+        const collection = new Collection();
+        const otherCollection = new Collection();
+        expect(collection !== otherCollection).toBeTruthy();
+      } catch (e) {
+        throw new Error('Looks like two different `new Collection()` have the same reference');
+      }
     }),
 
-    it('add method exists', () => {
-      const collection = new Collection();
-      // collection.hasOwnProperty
-      expect(typeof collection.add !== 'undefined').toBeTruthy();
-    }),
-
-    it('add should not be a property of Collection', () => {
-      const collection = new Collection();
-
-      expect(typeof collection.add !== 'undefined').toBeTruthy();
-      // collection.hasOwnProperty
-      expect(!Object.prototype.hasOwnProperty.call(collection, 'add')).toBeTruthy();
-    }),
-
-    it('add() should save a value', () => {
-      const collection = new Collection();
-
-      collection.add('foo', 'bar');
-      expect(collection.foo).toBe('bar');
-    }),
-
-    it('Constructor should add keys in object', () => {
-      const collection = new Collection({
-        name: 'test',
-        email: 'hello@world',
-      });
-
-      expect(collection.name).toBe('test');
-      expect(collection.email).toBe('hello@world');
-    }),
-
-    it('get method exists', () => {
+    it('.add() method exists', () => {
       const collection = new Collection();
       // collection.hasOwnProperty
-      expect(typeof collection.get !== 'undefined').toBeTruthy();
+      expect(typeof collection.add !== 'undefined')
+        .toBeTruthy('**Collection** doesn\'t have a `.add()` method');
+    }),
+
+    it('.get() method exists', () => {
+      const collection = new Collection();
+      // collection.hasOwnProperty
+      expect(typeof collection.get !== 'undefined')
+        .toBeTruthy('**Collection** doesn\'t have a `.get()` method');
+    }),
+
+    it('.remove() method exists', () => {
+      const collection = new Collection();
+      // collection.hasOwnProperty
+      expect(typeof collection.remove !== 'undefined')
+        .toBeTruthy('**Collection** doesn\'t have a `.remove()` method');
+    }),
+
+    it('.forEach() method exists', () => {
+      const collection = new Collection();
+      // collection.hasOwnProperty
+      expect(typeof collection.forEach !== 'undefined')
+        .toBeTruthy('**Collection** doesn\'t have a `.forEach()` method');
+    }),
+
+    it('.add() should not be a property of Collection', () => {
+      const collection = new Collection();
+
+      expect(typeof collection.add !== 'undefined')
+        .toBeTruthy('.add() doesn\'t exist');
+      expect(!Object.prototype.hasOwnProperty.call(collection, 'add'))
+        .toBeTruthy('Looks like `.add()` is a property, not a method');
+    }),
+
+    it('.add() should save a value', () => {
+      const collection = new Collection();
+
+      try {
+        collection.add('foo', 'bar');
+        expect(collection.foo)
+          .toBe('bar', '`.add()` is not saving any value');
+      } catch (e) {
+        throw new Error('.add() doesn\'t exist');
+      }
     }),
 
     it('get should not be a property of Collection', () => {
@@ -113,12 +138,6 @@ export const testCases = code => describe('Foo test', () => {
       expect(collection.foo).toBe('bar');
     }),
 
-    it('remove method exists', () => {
-      const collection = new Collection();
-      // collection.hasOwnProperty
-      expect(typeof collection.remove !== 'undefined').toBeTruthy();
-    }),
-
     it('remove should not be a property of Collection', () => {
       const collection = new Collection();
 
@@ -135,18 +154,22 @@ export const testCases = code => describe('Foo test', () => {
       expect(collection.foo).toBe(undefined);
     }),
 
-    it('forEach method exists', () => {
-      const collection = new Collection();
-      // collection.hasOwnProperty
-      expect(typeof collection.forEach !== 'undefined').toBeTruthy();
-    }),
-
     it('forEach should not be a property of Collection', () => {
       const collection = new Collection();
 
       expect(typeof collection.forEach !== 'undefined').toBeTruthy();
       // collection.hasOwnProperty
       expect(!Object.prototype.hasOwnProperty.call(collection, 'forEach')).toBeTruthy();
+    }),
+
+    it('Constructor should add keys in object', () => {
+      const collection = new Collection({
+        name: 'test',
+        email: 'hello@world',
+      });
+
+      expect(collection.name).toBe('test');
+      expect(collection.email).toBe('hello@world');
     }),
 
     it('Should not expose data to other instances', () => {
