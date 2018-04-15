@@ -10,7 +10,7 @@ import codeResults, {
   resultsProps,
 } from '../store/codeResults';
 
-import { getMargin, getPadding } from '../utils/theme';
+import { getMargin, getPadding, getComplementBackgroundColor } from '../utils/theme';
 
 import highlightCode from '../utils/highlightCode';
 
@@ -31,6 +31,10 @@ const TestsContainer = Container.extend`
 `;
 
 const TestListElement = List.Element.extend`
+  &:nth-child(even) {
+    background-color: ${getComplementBackgroundColor};
+  }
+
   h4 {
     margin: 0;
   }
