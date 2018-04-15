@@ -30,6 +30,12 @@ const TestsContainer = Container.extend`
   padding-top: ${props => props.height}px;
 `;
 
+const TestListElement = List.Element.extend`
+  h4 {
+    margin: 0;
+  }
+`;
+
 const EmptyResults = () => (
   <Container verticalAlign style={{ height: '100%' }}>
     <NoTestsTitle margin="xlarge">
@@ -84,15 +90,15 @@ class TestsResults extends Component {
           error,
           isFailed,
         }) => (
-          <List.Element
+          <TestListElement
             clickable={false}
             key={name}
           >
             <ReactMarkdown
-              source={`### ${isFailed ? '⚠️' : '👌'} ${name}
+              source={`#### ${isFailed ? '❗️' : '✅'} ${name}
 ${isFailed ? error : ''}`}
             />
-          </List.Element>
+          </TestListElement>
         ))}
       </List>
     );
