@@ -194,4 +194,21 @@ describe('describe', () => {
 
     expect(test).toEqual(expectedResult);
   });
+
+  it('Should catch exceptions and turn them into failed test', () => {
+    expect(evaluateDescribe('something being tested', () => {
+      throw new Error('Oh no!');
+    })).toEqual({
+      name: 'something being tested',
+      tests: [
+        {
+          isFailed: true,
+          error: 'Oh no!',
+          name: 'There was a problem executing your code',
+        },
+      ],
+      passedTests: 0,
+      ratio: 0,
+    });
+  });
 });

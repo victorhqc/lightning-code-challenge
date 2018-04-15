@@ -104,21 +104,40 @@ const updateTestResultByOptions = (tests, options) => {
 };
 
 export const describe = (name, tests, options = getDefaultOptions()) => {
-  const runnedTests = updateTestResultByOptions(tests(), options);
-  const passedTests = sumBy(runnedTests, ({ isFailed }) => {
-    if (isFailed) {
-      return 0;
-    }
+  try {
+    const runnedTests = updateTestResultByOptions(tests(), options);
+    const passedTests = sumBy(runnedTests, ({ isFailed }) => {
+      if (isFailed) {
+        return 0;
+      }
 
-    return 1;
-  });
+      return 1;
+    });
 
-  return {
-    name,
-    tests: runnedTests,
-    ratio: passedTests / runnedTests.length,
-    passedTests,
-  };
+    return {
+      name,
+      tests: runnedTests,
+      ratio: passedTests / runnedTests.length,
+      passedTests,
+    };
+  } catch (e) {
+    return {
+      name,
+      tests: [{
+        name: 'There was a problem executing your code',
+        isFailed: true,
+        error: e.message,
+      }],
+      ratio: 0,
+      passedTests: 0,
+    };
+  }
 };
 
-export const parseTextToCode = code => Function(`"use strict"; return (${code})`)();
+export const parseTextToCode = (code) => {
+  try {
+    return Function(`"use strict"; return (${code})`)();
+  } catch (e) {
+    throw new Error(e);
+  }
+};
