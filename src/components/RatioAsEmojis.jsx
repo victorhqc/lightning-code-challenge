@@ -24,8 +24,8 @@ const RatioAsEmojis = ({ ratio }) => {
   if (ratio < 1 / 2) {
     return (
       <EmojisWrapper>
-        <span role="img" aria-label="neutral">
-          😐
+        <span role="img" aria-label="Thinking">
+          🤔
         </span>
         {' '}
         <span role="img" aria-label="shrimp">
@@ -38,12 +38,12 @@ const RatioAsEmojis = ({ ratio }) => {
   if (ratio < 1) {
     return (
       <EmojisWrapper>
-        <span role="img" aria-label="Slightly Smiling Face">
-          🙂
+        <span role="img" aria-label="omg">
+          😱
         </span>
         {' '}
-        <span role="img" aria-label="Taco">
-          🌮
+        <span role="img" aria-label="Burrito">
+          🌯
         </span>
       </EmojisWrapper>
     );
@@ -55,8 +55,8 @@ const RatioAsEmojis = ({ ratio }) => {
         😎
       </span>
       {' '}
-      <span role="img" aria-label="Pancakes">
-        🥞
+      <span role="img" aria-label="Cake">
+        🍰
       </span>
     </EmojisWrapper>
   );
